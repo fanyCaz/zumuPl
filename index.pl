@@ -9,11 +9,14 @@ use strict;
 
 #Imprime la dimension de la matriz
 sub cuadro {
-
+#holi
 	for(my $x=0;$x<$_[0];$x+=1){
-		print "[";	
+		print "pos:".$x." [";	
 		for(my $y=0;$y<$_[0];$y+=1){
-			print " .";
+			if($y==0){
+				print "(>)"
+			}
+			print " |_ ".$y."_|";
 		}
 		print "]\n";
 	}
@@ -42,7 +45,8 @@ my $nivel=<>;
 # my $random=0;
 # do{
 # 	$random=int(rand(4));	
+#random no . Hay que una subrutina que genere numeros aleatorios
 # }while($random==0);
 # print $random;
 
-&m1();
+# &m1();
