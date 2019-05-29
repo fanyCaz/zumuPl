@@ -13,7 +13,7 @@ my $nivel=0;
 my $numAzar=0;
 my $gameToPlay=0;
 my $n=1;
-my $x;
+my $x=1;
 my @mayorQue;
 my @menorQue;
 my @residuo;
@@ -27,7 +27,6 @@ my $level;
 sub cuadro {
 	my (@simPl,$level) = @_;
 	for(my $i=0; $i < 3; $i+=1){
-		$espacio=0;
 		print "[";
 		for(my $j=0; $j < 3; $j+=1){
 
@@ -53,6 +52,7 @@ sub cuadro {
 			}
 			elsif($espacio==1){
 				print "   |  |";
+				$espacio=0;
 			}
 			else{
 				print "| |";
@@ -60,6 +60,22 @@ sub cuadro {
 		}
 		print "]\n";
 	}
+}
+
+sub input(){
+	#coordenDSS
+
+	print "Ingrese las coordenadas";
+	print "(";
+	while ($x < 0 || $x > $level) {
+		$x = <STDIN>;	
+	}
+	print ",";
+	while ($y < 0 || $y > $level) {
+		$y = <STDIN>;
+	}
+	print ")";
+	
 }
 
 	# Xn+1=(2xo + c)mod m
@@ -101,8 +117,12 @@ sub Plantilla3 {
 
 #SCRIPT
 sub Menu {
-	print "Niveles a Jugar: \n"."Nivel 1: 4x4 \n"."Nivel 2: 5x5 \n"."Nivel 3: 6x6 \n";
+	print "Intrucciones cortas: ";
+print "En 'Mainarizumu' se presenta un tablero vacío, en donde tendrás que rellenar los recuadros con numeros del 1 hasta el numero de filas que juegues\n";
+	print "Habra simbolos como: '>' mayor que, y '<' menor que. Si estos simbolos conectan dos recuadros tendras que escribir valores que cumplan esta condicion\n";
+	print "Si dos recuadros estan conectados por un numero, tendras que escribir valores en estos recuadros que cumplan una resta que de como resultado el numero que se presente\n";
 	do{
+		print "Niveles a Jugar: \n"."Nivel 1: 4x4 \n"."Nivel 2: 5x5 \n"."Nivel 3: 6x6 \n";
 		print "Ingresa el nivel que quieres jugar: ";
 		$nivel=<>;
 	}while($nivel < 1 || $nivel > 3);
@@ -129,6 +149,7 @@ sub Menu {
 	}
 }
 
+#SCRIPT
 print "MAINARIZUMU \n";
 print "Presione 1 si desea jugar una partida. Presione cualguier otro numero para salir\n";
 $respuesta=<>;
@@ -138,16 +159,3 @@ if($respuesta == 1){
 else{
 	print "Salir";
 }
-#Los parametros se manejan como un arreglo, es decir, yo le mando un parametro y
-# lo recibe en el arreglo param[x], 
-#le mando otro y lo recibe como param[x,y]
-#y de esa manera se mandan a llamar
-
-# NIVEL 1
-# {
-# #MAINA1
-
-# #MAINA2
-
-# #MAINA3
-# }
