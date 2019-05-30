@@ -32,30 +32,31 @@ sub cuadro {
 
 			if($simPl[0][1]==$i && $simPl[0][2]==$j){
 				if($simPl[0][0]==2000){
-					print "|(>)| |";
+					print "|(>)| || |";
 					$espacio=1;
 				}
 				elsif($simPl[0][0]==1000){
-					print "|(<)| |";
+					print "|(<)| || |";
 					$espacio=1;
 				}
 			}
 			elsif($simPl[1][1]==$i && $simPl[1][2]==$j){
 				if($simPl[1][0]==2000){
-					print "|(>)| |";
+					print "|(>)| || |";
 					$espacio=1;
 				}
 				elsif($simPl[1][0]==1000){
-					print "|(<)| |";
+					print "|(<)| || |";
 					$espacio=1;
 				}
 			}
 			elsif($espacio==1){
-				print "   |  |";
+				print "|  |  ";
 				$espacio=0;
 			}
 			else{
 				print "| |";
+				$espacio=0;
 			}
 		}
 		print "]\n";
@@ -100,7 +101,7 @@ sub Plantilla1 {
 }
 
 sub Plantilla2 {
-	@mayorQue = (1000,0,2);
+	@mayorQue = (2000,0,2);
 	@menorQue = (2000,0,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 1;
@@ -131,10 +132,10 @@ print "En 'Mainarizumu' se presenta un tablero vacío, en donde tendrás que rel
 	$gameToPlay = &numAleatorio();
 	print "Numero elegido :". $gameToPlay."\n";
 	if ($nivel == 1){
-		if($gameToPlay > 30){
+		if($gameToPlay > 21){
 			&Plantilla1();
 		}
-		elsif($gameToPlay > 20){
+		elsif($gameToPlay > 11){
 			&Plantilla2();
 		}
 		else{
