@@ -19,64 +19,57 @@ my @menorQue;
 my @residuo;
 my $espacio;
 my @simbolicPlaces;
+my @coordenadas;
 my $respuesta;
 my $level;
+my $renglon=0;
+my $h=0;
+my $v=0;
+my $numero;
 
 #FUNCIONES
 	#Imprime la dimension de la matriz
 sub cuadro {
 	my (@simPl,$level) = @_;
-	for(my $i=0; $i < 3; $i+=1){
+	for(my $i=0; $i < 4; $i+=1){
 		print "[";
-		for(my $j=0; $j < 3; $j+=1){
+		for(my $j=0; $j < 4; $j+=1){
 
 			if($simPl[0][1]==$i && $simPl[0][2]==$j){
 				if($simPl[0][0]==2000){
-					print "|(>)| || |";
+					print "|(>)|  ||";
 					$espacio=1;
+					$renglon=$j;
 				}
 				elsif($simPl[0][0]==1000){
-					print "|(<)| || |";
+					print "|(<)|  ||";
 					$espacio=1;
+					$renglon=$j;
 				}
 			}
 			elsif($simPl[1][1]==$i && $simPl[1][2]==$j){
 				if($simPl[1][0]==2000){
-					print "|(>)| || |";
+					print "|(>)|  ||";
 					$espacio=1;
+					$renglon=$j;
 				}
 				elsif($simPl[1][0]==1000){
-					print "|(<)| || |";
+					print "|(<)|  ||";
 					$espacio=1;
+					$renglon=$j;
 				}
 			}
-			elsif($espacio==1){
-				print "|  |  ";
+			elsif($espacio==1 && $renglon != $j){
+				print "|  |";
 				$espacio=0;
 			}
 			else{
-				print "| |";
+				print "|  |";
 				$espacio=0;
 			}
 		}
 		print "]\n";
 	}
-}
-
-sub input(){
-	#coordenDSS
-
-	print "Ingrese las coordenadas";
-	print "(";
-	while ($x < 0 || $x > $level) {
-		$x = <STDIN>;	
-	}
-	print ",";
-	while ($y < 0 || $y > $level) {
-		$y = <STDIN>;
-	}
-	print ")";
-	
 }
 
 	# Xn+1=(2xo + c)mod m
@@ -89,6 +82,23 @@ sub numAleatorio {
 	return $numAzar;
 }
 
+sub input {
+	#coordenDSS
+	$level=@_[0];
+	print "Ingrese el numero que quiere ingresar";
+	$numero = <STDIN>;
+	print "(";
+	while ($h < 1 || $h > $level) {
+		$h = <STDIN>;
+	}
+	print ",";
+	while ($v < 1 || $v > $level) {
+		$v = <STDIN>;
+	}
+	print ")";
+	return $h,$v,$numero;
+}
+
 #PLANTILLAS
 	#Plantilla 1
 	#1000 es > ; 2000 es < ; # es numeroResiduo
@@ -96,24 +106,30 @@ sub Plantilla1 {
 	@mayorQue = (1000,0,2);
 	@menorQue = (2000,0,3);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 1;
+	$level= 4;
 	&cuadro(@simbolicPlaces,$level);
+	@coordenadas=input($level);
+	
 }
 
 sub Plantilla2 {
 	@mayorQue = (2000,0,2);
 	@menorQue = (2000,0,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 1;
+	$level= 4;
 	&cuadro(@simbolicPlaces,$level);
+	@coordenadas=input($level);
+	print $coordenadas[0];
 }
 
 sub Plantilla3 {
 	@mayorQue = (5,0,2);
 	@menorQue = (1000,0,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 1;
+	$level= 4;
 	&cuadro(@simbolicPlaces,$level);
+	@coordenadas=input($level);
+	print $coordenadas[0];
 }
 
 #SCRIPT
