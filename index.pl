@@ -20,6 +20,7 @@ my @residuo;
 my $espacio;
 my @simbolicPlaces;
 my @coordenadas;
+my @addedNumbers;
 my $respuesta;
 my $level;
 my $renglon=0;
@@ -109,7 +110,9 @@ sub Plantilla1 {
 	$level= 4;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
-	
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print $addedNumbers[3][4];
+	print "¿Verificar?"
 }
 
 sub Plantilla2 {
@@ -119,7 +122,9 @@ sub Plantilla2 {
 	$level= 4;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
-	print $coordenadas[0];
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print $addedNumbers[3][4];
+	print "¿Verificar?"
 }
 
 sub Plantilla3 {
@@ -129,12 +134,14 @@ sub Plantilla3 {
 	$level= 4;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
-	print $coordenadas[0];
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print $addedNumbers[3][4];
+	print "¿Verificar?"
 }
 
 #SCRIPT
 sub Menu {
-	print "Intrucciones cortas: ";
+	print "Instrucciones cortas: ";
 print "En 'Mainarizumu' se presenta un tablero vacío, en donde tendrás que rellenar los recuadros con numeros del 1 hasta el numero de filas que juegues\n";
 	print "Habra simbolos como: '>' mayor que, y '<' menor que. Si estos simbolos conectan dos recuadros tendras que escribir valores que cumplan esta condicion\n";
 	print "Si dos recuadros estan conectados por un numero, tendras que escribir valores en estos recuadros que cumplan una resta que de como resultado el numero que se presente\n";
@@ -166,12 +173,24 @@ print "En 'Mainarizumu' se presenta un tablero vacío, en donde tendrás que rel
 	}
 }
 
+sub Instrucciones {
+	print "Instrucciones\n";
+	print "Para poder jugar este puzzle, deberás saber sus reglas:\n";
+	print "Los numeros no deben repetirse en fila o columna\n";
+	print "Habra simbolos como : '<' o '>', esto significa, que cada vez que encuentres uno tendras que poner numeros en los cuadros adyacentes que cumplan esta regla, por ejemplo\n";
+	print "|5|(>)|2|  Aqui esta regla es cumplida, por lo tanto, puedes continuar\n";
+	&Menu();
+}
+
 #SCRIPT
 print "MAINARIZUMU \n";
-print "Presione 1 si desea jugar una partida. Presione cualguier otro numero para salir\n";
+print "Presione 1 si desea jugar una partida. Presione 2 si eres Nuevo Jugador. O cualquier otra tecla si deseas salir\n";
 $respuesta=<>;
 if($respuesta == 1){
 	&Menu();
+}
+elsif($respuesta == 2){
+	&Instrucciones();
 }
 else{
 	print "Salir";
