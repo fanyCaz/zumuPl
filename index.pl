@@ -39,24 +39,24 @@ sub cuadro {
 
 			if($simPl[0][1]==$i && $simPl[0][2]==$j){
 				if($simPl[0][0]==2000){
-					print "|(>)|  ||";
+					print ">  |";
 					$espacio=1;
 					$renglon=$j;
 				}
 				elsif($simPl[0][0]==1000){
-					print "|(<)|  ||";
+					print "<  |";
 					$espacio=1;
 					$renglon=$j;
 				}
 			}
 			elsif($simPl[1][1]==$i && $simPl[1][2]==$j){
 				if($simPl[1][0]==2000){
-					print "|(>)|  ||";
+					print ">  |";
 					$espacio=1;
 					$renglon=$j;
 				}
 				elsif($simPl[1][0]==1000){
-					print "|(<)|  ||";
+					print "<  |";
 					$espacio=1;
 					$renglon=$j;
 				}
@@ -143,8 +143,9 @@ sub Plantilla3 {
 }
 
 sub Plantilla4 {
-	@mayorQue = (1000,1,1);
+	@mayorQue = ((1000,1,1),(1000,2,3));
 	@menorQue = (2000,0,1);
+
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 1;
 	&cuadro(@simbolicPlaces,$level);
@@ -225,13 +226,15 @@ sub Instrucciones {
 #SCRIPT
 print "MAINARIZUMU \n";
 print "Presione '1' si desea jugar una partida. Presione '2' si eres Nuevo Jugador, \242 cualquier otra tecla si deseas salir.\n";
-$respuesta=<>;
-if($respuesta == 1){
-	&Menu(0);
-}
-elsif($respuesta == 2){
-	&Instrucciones();
-}
-else{
-	print "Salir";
-}
+&Plantilla4();
+
+# $respuesta=<>;
+# if($respuesta == 1){
+# 	&Menu(0);
+# }
+# elsif($respuesta == 2){
+# 	&Instrucciones();
+# }
+# else{
+# 	print "Salir";
+# }
