@@ -142,29 +142,32 @@ sub Plantilla3 {
 	print "¿Verificar?";
 }
 
-sub Plantilla4{
+sub Plantilla4 {
 	@mayorQue = (1000,1,1);
 	@menorQue = (2000,0,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 1;
-	&cuadro(@simbolicPlaces,$level);}
+	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+}
 
 sub Plantilla5{
 	@mayorQue = (1000,0,1);
 	@menorQue = (2000,3,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 1;
-	&cuadro(@simbolicPlaces,$level);}
+	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+}
 
 sub Plantilla6{
 	@mayorQue = (1000,3,1);
 	@menorQue = (2000,0,0);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 3;
-	&cuadro(@simbolicPlaces,$level);}
+	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+}
 
 sub Plantilla7{
 	@mayorQue = (1000,1,0);
