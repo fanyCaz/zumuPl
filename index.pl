@@ -146,7 +146,7 @@ sub Plantilla4 {
 	@mayorQue = (1000,1,0);
 	@menorQue = ((2000,0,0,(2000,2,2),(2000,2,3));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 1;
+	$level= 4;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
@@ -158,7 +158,7 @@ sub Plantilla5{
 	@mayorQue = ((1000,0,0).(1000,0,2));
 	@menorQue = (2000,2,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 1;
+	$level= 4;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
@@ -170,7 +170,7 @@ sub Plantilla6{
 	@mayorQue = ((1000,1,3),(1000,4,4),(1000,4,5));
 	@menorQue = ((2000,w,),(2000,,),(2000,,),(2000,,),(2000,,),(2000,,));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 3;
+	$level= 6;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
@@ -182,7 +182,7 @@ sub Plantilla7{
 	@mayorQue = ((1000,2,1),(1000,0,3),(1000,3,3));
 	@menorQue = ((2000,1,0),(2000,4,0),(2000,4,3),(2000,3,5));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 3;
+	$level= 6;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
