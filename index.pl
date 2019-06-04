@@ -116,7 +116,8 @@ sub input {
 }
 
 sub Verificar() {
-	print @addedNumbers;
+	
+	#Acepta el valor: print $addedNumbers[2][2];
 }
 #PLANTILLAS
 	#Plantilla 1
@@ -181,7 +182,7 @@ sub Plantilla3 {
 
 sub Plantilla4 {
 	@mayorQue = (1000,1,0);
-	@menorQue = ((2000,0,0,(2000,2,2),(2000,2,3));
+	@menorQue = ((2000,0,0),(2000,2,2),(2000,2,3));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 4;
 	&cuadro(@simbolicPlaces,$level);
@@ -219,7 +220,7 @@ sub Plantilla5{
 
 sub Plantilla6{
 	@mayorQue = ((1000,1,3),(1000,4,4),(1000,4,5));
-	@menorQue = ((2000,w,),(2000,,),(2000,,),(2000,,),(2000,,),(2000,,));
+	@menorQue = ((2000,,),(2000,,),(2000,,),(2000,,),(2000,,),(2000,,));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 6;
 	&cuadro(@simbolicPlaces,$level);
