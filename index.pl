@@ -3,16 +3,18 @@
 use strict;
 use POSIX qw/strftime/;
 use Time::Local;
+use Term::Cap;
 
 #Hora local de Laptop
 my ($s, $min, $h, $d, $m, $y) = localtime();
 my $time = timelocal $s, $min, $h, $d, $m, $y;
-
+my $t = Term::Cap->Tgetent;
 #VARIABLES
 my $nivel=0;
 my $numAzar=0;
 my $gameToPlay=0;
 my $sawInstructions;
+my $verificado;
 my $n=1;
 my $x=1;
 my @mayorQue;
@@ -85,25 +87,37 @@ sub numAleatorio {
 }
 
 sub input {
-	#coordenDSS
+	#Coordenadas
+	$h=0;
+	$v=0;
+	print "Las coordenadas en x son los lugares en horizontal";
+	print "Las coordenadas en y son los lugares en vertical";
+
 	$level=@_[0];
+	print "Ingresa  la coordenada en x: ";
+	while ($h < 1 || $h > $level) {
+		print "Ingresa  la coordenada en x: ";
+		$h = <STDIN>;
+	}
+	print "Ingrese la coordenada en y: ";
+	while ($v < 1 || $v > $level) {
+		print "Ingrese la coordenada en y: ";
+		$v = <STDIN>;
+	}
+	print ")";
+	print $h." h \n v".$v;
+	
 	do{
 		print "Ingrese el numero que quiere ingresar";
 		$numero = <STDIN>;
 	}while($numero < 1 || $numero > $level);
-	
-	print "Ingrese el renglon :";
-	while ($h < 1 || $h > $level) {
-		$h = <STDIN>;
-	}
-	print "Ingrese la columna :";
-	while ($v < 1 || $v > $level) {
-		$v = <STDIN>;
-	}
-	print ")";
+
 	return $h,$v,$numero;
 }
 
+sub Verificar() {
+	print @addedNumbers;
+}
 #PLANTILLAS
 	#Plantilla 1
 	#1000 es > ; 2000 es < ; # es numeroResiduo
@@ -116,6 +130,14 @@ sub Plantilla1 {
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	print "¿Verificar?";
+	print "¿Ingresar otro número?";
+	my $verificacion = <STDIN>;
+	if($verificacion == 1){
+		&Plantilla1();	
+	}
+	else{
+		$verificado=&Verificar(@addedNumbers);
+	}
 }
 
 sub Plantilla2 {
@@ -127,7 +149,15 @@ sub Plantilla2 {
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	print $addedNumbers[3][4];
-	print "¿Verificar?";
+	print "¿Ingresar otro número?";
+	my $verificacion = <STDIN>;
+	if($verificacion == 1){
+		&Plantilla2();	
+	}
+	else{
+		&Verificar();
+	}
+	
 }
 
 sub Plantilla3 {
@@ -139,17 +169,33 @@ sub Plantilla3 {
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	print $addedNumbers[3][4];
-	print "¿Verificar?";
+	print "¿Ingresar otro número?";
+	my $verificacion = <STDIN>;
+	if($verificacion == 1){
+		&Plantilla3();
+	}
+	else{
+		&Verificar();
+	}
 }
 
 sub Plantilla4 {
-	@mayorQue = ((1000,1,1),(1000,2,3));
+	@mayorQue = (1000,1,1);
 	@menorQue = (2000,0,1);
 
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 1;
+	$level= 5;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print "¿Ingresar otro número?";
+	my $verificacion = <STDIN>;
+	if($verificacion == 1){
+		&Plantilla4(@addedNumbers);
+	}
+	else{
+		&Verificar();
+	}
 }
 
 sub Plantilla5{
@@ -159,6 +205,14 @@ sub Plantilla5{
 	$level= 1;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+	print "¿Ingresar otro número?";
+	my $verificacion = <STDIN>;
+	if($verificacion == 1){
+		&Plantilla5();
+	}
+	else{
+		&Verificar();
+	}
 }
 
 sub Plantilla6{
@@ -168,6 +222,14 @@ sub Plantilla6{
 	$level= 3;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+	print "¿Ingresar otro número?";
+	my $verificacion = <STDIN>;
+	if($verificacion == 1){
+		&Plantilla6();
+	}
+	else{
+		&Verificar();
+	}
 }
 
 sub Plantilla7{
@@ -177,7 +239,15 @@ sub Plantilla7{
 	$level= 3;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+	print "¿Ingresar otro número?";
+	my $verificacion = <STDIN>;
+	if($verificacion == 1){
+		&Plantilla7();
 	}
+	else{
+		&Verificar();
+	}
+}
 
 #SCRIPT
 sub Menu {
