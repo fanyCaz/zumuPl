@@ -139,12 +139,48 @@ sub Plantilla3 {
 	print "¿Verificar?"
 }
 
+=begin comment 
+sub Plantilla4{
+	@mayorQue = (1000,1,1);
+	@menorQue = (2000,0,1);
+	@simbolicPlaces = (\@mayorQue,\@menorQue);
+	$level= 1;
+	&cuadro(@simbolicPlaces,$level);}
+	@coordenadas=input($level);
+
+sub Plantilla5{
+	@mayorQue = (1000,0,1);
+	@menorQue = (2000,3,1);
+	@simbolicPlaces = (\@mayorQue,\@menorQue);
+	$level= 1;
+	&cuadro(@simbolicPlaces,$level);}
+	@coordenadas=input($level);
+
+sub Plantilla6{
+	@mayorQue = (1000,3,1);
+	@menorQue = (2000,0,0);
+	@simbolicPlaces = (\@mayorQue,\@menorQue);
+	$level= 3;
+	&cuadro(@simbolicPlaces,$level);}
+	@coordenadas=input($level);
+
+sub Plantilla7{
+	@mayorQue = (1000,1,0);
+	@menorQue = (2000,2,1);
+	@simbolicPlaces = (\@mayorQue,\@menorQue);
+	$level= 3;
+	&cuadro(@simbolicPlaces,$level);
+	@coordenadas=input($level);
+	}
+=end comment
+=cut
+
 #SCRIPT
 sub Menu {
 	print "Instrucciones cortas: ";
-print "En 'Mainarizumu' se presenta un tablero vacío, en donde tendrás que rellenar los recuadros con numeros del 1 hasta el numero de filas que juegues\n";
-	print "Habra simbolos como: '>' mayor que, y '<' menor que. Si estos simbolos conectan dos recuadros tendras que escribir valores que cumplan esta condicion\n";
-	print "Si dos recuadros estan conectados por un numero, tendras que escribir valores en estos recuadros que cumplan una resta que de como resultado el numero que se presente\n";
+	print "En 'Mainarizumu' se presenta un tablero vac\241o, en donde tendr\240s que rellenar los recuadros con n\243meros del 1 hasta el n\243mero de filas que juegues.\n";
+	print "Habr\240 s\241mbolos como: '>' mayor qu\202, y '<' menor qu\202. Si estos s\241mbolos conectan dos recuadros, tendr\240s que escribir valores que cumplan esta condici\242n.\n";
+	print "Si dos recuadros est\240n conectados por un n\243mero, tendr\240s que escribir valores en estos recuadros que cumplan una resta que d\202 como resultado el n\243mero que se presente.\n";
 	do{
 		print "Niveles a Jugar: \n"."Nivel 1: 4x4 \n"."Nivel 2: 5x5 \n"."Nivel 3: 6x6 \n";
 		print "Ingresa el nivel que quieres jugar: ";
@@ -153,7 +189,7 @@ print "En 'Mainarizumu' se presenta un tablero vacío, en donde tendrás que rel
 	
 	#Llamar a subrutina
 	$gameToPlay = &numAleatorio();
-	print "Numero elegido :". $gameToPlay."\n";
+	print "N\243mero elegido :". $gameToPlay."\n";
 	if ($nivel == 1){
 		if($gameToPlay > 21){
 			&Plantilla1();
@@ -174,17 +210,17 @@ print "En 'Mainarizumu' se presenta un tablero vacío, en donde tendrás que rel
 }
 
 sub Instrucciones {
-	print "Instrucciones\n";
-	print "Para poder jugar este puzzle, deberás saber sus reglas:\n";
-	print "Los numeros no deben repetirse en fila o columna\n";
-	print "Habra simbolos como : '<' o '>', esto significa, que cada vez que encuentres uno tendras que poner numeros en los cuadros adyacentes que cumplan esta regla, por ejemplo\n";
-	print "|5|(>)|2|  Aqui esta regla es cumplida, por lo tanto, puedes continuar\n";
+	print "Instrucciones.\n";
+	print "Para poder jugar este puzzle, deber\240s saber sus reglas:\n";
+	print "Los n\243meros no deben repetirse en fila o columna.\n";
+	print "Habr\240 s\241mbolos como : '<' o '>', esto significa, que cada vez que encuentres uno, tendr\240s que poner n\243meros en los cuadros adyacentes que cumplan esta regla, por ejemplo: \n";
+	print "|5|(>)|2|  Aqu\241, esta regla es cumplida, por lo tanto, puedes continuar.\n";
 	&Menu();
 }
 
 #SCRIPT
 print "MAINARIZUMU \n";
-print "Presione 1 si desea jugar una partida. Presione 2 si eres Nuevo Jugador. O cualquier otra tecla si deseas salir\n";
+print "Presione '1' si desea jugar una partida. Presione '2' si eres Nuevo Jugador, \242 cualquier otra tecla si deseas salir.\n";
 $respuesta=<>;
 if($respuesta == 1){
 	&Menu();
