@@ -219,7 +219,7 @@ sub Plantilla5{
 
 sub Plantilla6{
 	@mayorQue = ((1000,1,3),(1000,4,4),(1000,4,5));
-	@menorQue = ((2000,w,),(2000,,),(2000,,),(2000,,),(2000,,),(2000,,));
+	@menorQue = ((2000,0,1),(2000,1,2),(2000,5,1),(2000,3,4),(2000,1,4),(2000,1,5));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 6;
 	&cuadro(@simbolicPlaces,$level);
