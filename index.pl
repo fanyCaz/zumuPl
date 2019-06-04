@@ -143,40 +143,51 @@ sub Plantilla3 {
 }
 
 sub Plantilla4 {
-	@mayorQue = ((1000,1,1),(1000,2,3));
-	@menorQue = (2000,0,1);
-
+	@mayorQue = (1000,1,0);
+	@menorQue = ((2000,0,0,(2000,2,2),(2000,2,3));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 1;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print $addedNumbers[3][4];
+	print "¿Verificar?";
 }
 
 sub Plantilla5{
-	@mayorQue = (1000,0,1);
-	@menorQue = (2000,3,1);
+	@mayorQue = ((1000,0,0).(1000,0,2));
+	@menorQue = (2000,2,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 1;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print $addedNumbers[3][4];
+	print "¿Verificar?";
 }
 
 sub Plantilla6{
-	@mayorQue = (1000,3,1);
-	@menorQue = (2000,0,0);
+	@mayorQue = ((1000,1,3),(1000,4,4),(1000,4,5));
+	@menorQue = ((2000,w,),(2000,,),(2000,,),(2000,,),(2000,,),(2000,,));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 3;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print $addedNumbers[3][4];
+	print "¿Verificar?";
 }
 
 sub Plantilla7{
-	@mayorQue = (1000,1,0);
-	@menorQue = (2000,2,1);
+	@mayorQue = ((1000,2,1),(1000,0,3),(1000,3,3));
+	@menorQue = ((2000,1,0),(2000,4,0),(2000,4,3),(2000,3,5));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 3;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print $addedNumbers[3][4];
+	print "¿Verificar?";
 	}
 
 #SCRIPT
@@ -194,7 +205,7 @@ sub Menu {
 	
 	#Llamar a subrutina
 	$gameToPlay = &numAleatorio();
-	print "N\243mero elegido :". $gameToPlay."\n";
+	print "N\243mero elegido:". $gameToPlay."\n";
 	if ($nivel == 1){
 		if($gameToPlay > 21){
 			&Plantilla1();
@@ -207,19 +218,19 @@ sub Menu {
 		}
 	}
 	elsif ($nivel == 2){
-		print "Nivel 2";
+		print "Nivel 2: ";
 	}
 	else {
-		print "Nivel 3";
+		print "Nivel 3: ";
 	}
 }
 
 sub Instrucciones {
-	print "Instrucciones\n";
-	print "Para poder jugar este puzzle, deberás saber sus reglas:\n";
-	print "Los numeros no deben repetirse en fila o columna\n";
-	print "Habra simbolos como : '<' o '>', esto significa, que cada vez que encuentres uno tendras que poner numeros en los cuadros adyacentes que cumplan esta regla, por ejemplo\n";
-	print "|5|(>)|2|  Aqui esta regla es cumplida, por lo tanto, puedes continuar\n";
+	print "Instrucciones.\n";
+	print "Para poder jugar este puzzle, deber\240s saber sus reglas:\n";
+	print "Los n\243meros no deben repetirse en fila \242 columna.\n";
+	print "Habr\240 s\241mbolos c\242mo : '<' \242 '>', esto significa, que cada vez que encuentres uno, tendr\240s que poner n\241meros en los cuadros adyacentes que cumplan esta regla, por ejemplo:\n";
+	print "|5|(>)|2|  Aqu\241, esta regla es cumplida, por lo tanto, puedes continuar.\n";
 	&Menu(1);
 }
 
