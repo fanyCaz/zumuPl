@@ -30,7 +30,10 @@ my $renglon=0;
 my $h=0;
 my $v=0;
 my $numero;
-
+my $iIn=0;
+my $jIn=0;
+my $valorComparar=0;
+my $correcto=0;
 #FUNCIONES
 	#Imprime la dimension de la matriz
 sub cuadro {
@@ -116,7 +119,31 @@ sub input {
 }
 
 sub Verificar() {
-	
+	print "numero agregado:\n";
+
+	# print $addedNumbers[1][1];
+
+	for (my $i = 0; $i < $level; $i++) {		
+		for(my $j=0; $j < $level; $j++){
+			#defined es un equivalent de null
+			if(defined $addedNumbers[$i][$j]){
+				$valorComparar=$addedNumbers[$i][$j];
+				$correcto=0;
+				for (my $columna = 0; $columna < $level; $columna++) {
+					if(defined $addedNumbers[$i][$columna]){
+						if($valorComparar!=$addedNumbers[$i][$columna]){
+							$correcto++;
+						}
+						else{
+							$correcto=0;
+						}
+					}
+				}
+			}
+		$iIn++;
+		}
+	$jIn++;
+	}
 	#Acepta el valor: print $addedNumbers[2][2];
 }
 #PLANTILLAS
@@ -126,7 +153,7 @@ sub Plantilla1 {
 	@mayorQue = (1000,0,2);
 	@menorQue = (2000,0,3);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 4;
+	$level= 3;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
@@ -145,7 +172,7 @@ sub Plantilla2 {
 	@mayorQue = (2000,0,2);
 	@menorQue = (2000,0,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 4;
+	$level= 3;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
@@ -153,7 +180,7 @@ sub Plantilla2 {
 	print "¿Ingresar otro número?";
 	my $verificacion = <STDIN>;
 	if($verificacion == 1){
-		&Plantilla2();	
+		&Plantilla2();
 	}
 	else{
 		&Verificar();
@@ -165,7 +192,7 @@ sub Plantilla3 {
 	@mayorQue = (5,0,2);
 	@menorQue = (1000,0,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 4;
+	$level= 3;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
@@ -191,13 +218,11 @@ sub Plantilla4 {
 	print "¿Ingresar otro número?";
 	my $verificacion = <STDIN>;
 	if($verificacion == 1){
-		&Plantilla4(@addedNumbers);
+		&Plantilla4();
 	}
 	else{
-		&Verificar();
+		&Verificar(@addedNumbers);
 	}
-	print $addedNumbers[3][4];
-	print "¿Verificar?";
 }
 
 sub Plantilla5{
