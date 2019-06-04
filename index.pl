@@ -12,6 +12,7 @@ my $time = timelocal $s, $min, $h, $d, $m, $y;
 my $nivel=0;
 my $numAzar=0;
 my $gameToPlay=0;
+my $sawInstructions;
 my $n=1;
 my $x=1;
 my @mayorQue;
@@ -86,13 +87,16 @@ sub numAleatorio {
 sub input {
 	#coordenDSS
 	$level=@_[0];
-	print "Ingrese el numero que quiere ingresar";
-	$numero = <STDIN>;
-	print "(";
+	do{
+		print "Ingrese el numero que quiere ingresar";
+		$numero = <STDIN>;
+	}while($numero < 1 || $numero > $level);
+	
+	print "Ingrese el renglon :";
 	while ($h < 1 || $h > $level) {
 		$h = <STDIN>;
 	}
-	print ",";
+	print "Ingrese la columna :";
 	while ($v < 1 || $v > $level) {
 		$v = <STDIN>;
 	}
@@ -111,8 +115,7 @@ sub Plantilla1 {
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
-	print $addedNumbers[3][4];
-	print "¿Verificar?"
+	print "¿Verificar?";
 }
 
 sub Plantilla2 {
@@ -124,7 +127,7 @@ sub Plantilla2 {
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	print $addedNumbers[3][4];
-	print "¿Verificar?"
+	print "¿Verificar?";
 }
 
 sub Plantilla3 {
@@ -136,15 +139,19 @@ sub Plantilla3 {
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	print $addedNumbers[3][4];
-	print "¿Verificar?"
+	print "¿Verificar?";
 }
 
 #SCRIPT
 sub Menu {
-	print "Instrucciones cortas: ";
-print "En 'Mainarizumu' se presenta un tablero vacío, en donde tendrás que rellenar los recuadros con numeros del 1 hasta el numero de filas que juegues\n";
+	$sawInstructions=@_[0];
+	if($sawInstructions==0){
+		print "Instrucciones cortas: ";
+	print "En 'Mainarizumu' se presenta un tablero vacío, en donde tendrás que rellenar los recuadros con numeros del 1 hasta el numero de filas que juegues\n";
 	print "Habra simbolos como: '>' mayor que, y '<' menor que. Si estos simbolos conectan dos recuadros tendras que escribir valores que cumplan esta condicion\n";
-	print "Si dos recuadros estan conectados por un numero, tendras que escribir valores en estos recuadros que cumplan una resta que de como resultado el numero que se presente\n";
+	print "Si dos recuadros estan conectados por un numero, tendras que escribir valores en estos recuadros que cumplan una resta que de como resultado el numero que se presente\n";	
+	}
+	
 	do{
 		print "Niveles a Jugar: \n"."Nivel 1: 4x4 \n"."Nivel 2: 5x5 \n"."Nivel 3: 6x6 \n";
 		print "Ingresa el nivel que quieres jugar: ";
@@ -179,7 +186,7 @@ sub Instrucciones {
 	print "Los numeros no deben repetirse en fila o columna\n";
 	print "Habra simbolos como : '<' o '>', esto significa, que cada vez que encuentres uno tendras que poner numeros en los cuadros adyacentes que cumplan esta regla, por ejemplo\n";
 	print "|5|(>)|2|  Aqui esta regla es cumplida, por lo tanto, puedes continuar\n";
-	&Menu();
+	&Menu(1);
 }
 
 #SCRIPT
@@ -187,7 +194,7 @@ print "MAINARIZUMU \n";
 print "Presione 1 si desea jugar una partida. Presione 2 si eres Nuevo Jugador. O cualquier otra tecla si deseas salir\n";
 $respuesta=<>;
 if($respuesta == 1){
-	&Menu();
+	&Menu(0);
 }
 elsif($respuesta == 2){
 	&Instrucciones();
