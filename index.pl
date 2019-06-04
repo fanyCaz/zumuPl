@@ -142,7 +142,6 @@ sub Plantilla3 {
 	print "¿Verificar?";
 }
 
-=begin comment 
 sub Plantilla4{
 	@mayorQue = (1000,1,1);
 	@menorQue = (2000,0,1);
@@ -175,8 +174,6 @@ sub Plantilla7{
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	}
-=end comment
-=cut
 
 #SCRIPT
 sub Menu {
