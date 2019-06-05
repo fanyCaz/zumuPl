@@ -30,17 +30,7 @@ my $renglon=0;
 my $h=0;
 my $v=0;
 my $numero;
-<<<<<<< HEAD
-<<<<<<< HEAD
 my $p=0;
-
-=======
-my $iIn=0;
-my $jIn=0;
-my $valorComparar=0;
-my $correcto=0;
->>>>>>> 8b31718aac75dc3bf5ceb72264cbde53f90a3a8e
-=======
 my $res='si';
 my $valorComparar=0;
 my $correcto=0;
@@ -48,7 +38,6 @@ my $definidos=0;
 my $continuar=0;
 my $columna;
 my $filas;
->>>>>>> master
 #FUNCIONES
 	#Imprime la dimension de la matriz
 sub cuadro {
