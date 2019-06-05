@@ -30,6 +30,7 @@ my $renglon=0;
 my $h=0;
 my $v=0;
 my $numero;
+my $p=0;
 
 #FUNCIONES
 	#Imprime la dimension de la matriz
@@ -51,6 +52,7 @@ sub cuadro {
 					$renglon=$j;
 				}
 			}
+
 			elsif($simPl[1][1]==$i && $simPl[1][2]==$j){
 				if($simPl[1][0]==2000){
 					print ">  |";
@@ -181,11 +183,18 @@ sub Plantilla3 {
 }
 
 sub Plantilla4 {
-	@mayorQue = (1000,1,0);
-	@menorQue = ((2000,0,0),(2000,2,2),(2000,2,3));
+	@mayorQue = (1000,1,1);
+	@menorQue = ((2000,0,1),(2000,2,2),(2000,2,3));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 4;
 	&cuadro(@simbolicPlaces,$level);
+	for($p=0;$p<4;$p++){
+		print "[";
+		for(my $q=0;$q < 4 ; $q++){
+			print "| |";
+		}
+		print "]";
+	}
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	print "¿Ingresar otro número?";
@@ -219,10 +228,10 @@ sub Plantilla5{
 }
 
 sub Plantilla6{
-	@mayorQue = ((1000,1,3),(1000,4,4),(1000,4,5));
-	@menorQue = ((2000,0,1),(2000,1,2),(2000,5,1),(2000,3,4),(2000,1,4),(2000,1,5));
+	@mayorQue = ((1000,1,4),(1000,3,5));
+	@menorQue = (2000,1,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 6;
+	$level= 5;
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
@@ -235,8 +244,60 @@ sub Plantilla6{
 		&Verificar();
 	}
 }
-
+#1000 es > ; 2000 es < ; # es numeroResiduo
 sub Plantilla7{
+	@mayorQue = ((1000,4,0),(1000,1,4),(1000,4,5));
+	@menorQue = (2000,1,0);
+	@simbolicPlaces = (\@mayorQue,\@menorQue);
+	$level= 5;
+	&cuadro(@simbolicPlaces,$level);
+	@coordenadas=input($level);
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print "¿Ingresar otro número?";
+	my $verificacion = <STDIN>;
+	if($verificacion == 1){
+		&Plantilla7();
+	}
+	else{
+		&Verificar();
+	}
+}
+#1000 es > ; 2000 es < ; # es numeroResiduo
+sub Plantilla8{
+	@mayorQue = (1000,2,0);
+	@menorQue = ((2000,1,2),(2000,4,2),(2000,1,5));
+	@simbolicPlaces = (\@mayorQue,\@menorQue);
+	$level= 5;
+	&cuadro(@simbolicPlaces,$level);
+	@coordenadas=input($level);
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print "¿Ingresar otro número?";
+	my $verificacion = <STDIN>;
+	if($verificacion == 1){
+		&Plantilla8();
+	}
+	else{
+		&Verificar();
+	}
+	#1000 es > ; 2000 es < ; # es numeroResiduo
+}sub Plantilla9{
+	@mayorQue = ((1000,1,3),(1000,4,4),(1000,4,5));
+	@menorQue = ((2000,0,1),(2000,1,2),(2000,5,1),(2000,3,4),(2000,1,4),(2000,1,5));
+	@simbolicPlaces = (\@mayorQue,\@menorQue);
+	$level= 6;
+	&cuadro(@simbolicPlaces,$level);
+	@coordenadas=input($level);
+	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+	print "¿Ingresar otro número?";
+	my $verificacion = <STDIN>;
+	if($verificacion == 1){
+		&Plantilla9();
+	}
+	else{
+		&Verificar();
+	}
+	#1000 es > ; 2000 es < ; # es numeroResiduo
+}sub Plantilla10{
 	@mayorQue = ((1000,2,1),(1000,0,3),(1000,3,3));
 	@menorQue = ((2000,1,0),(2000,4,0),(2000,4,3),(2000,3,5));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
@@ -247,7 +308,7 @@ sub Plantilla7{
 	print "¿Ingresar otro número?";
 	my $verificacion = <STDIN>;
 	if($verificacion == 1){
-		&Plantilla7();
+		&Plantilla10();
 	}
 	else{
 		&Verificar();
