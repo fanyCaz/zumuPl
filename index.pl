@@ -30,10 +30,13 @@ my $renglon=0;
 my $h=0;
 my $v=0;
 my $numero;
-my $iIn=0;
-my $jIn=0;
+my $res='si';
 my $valorComparar=0;
 my $correcto=0;
+my $definidos=0;
+my $continuar=0;
+my $columna;
+my $filas;
 #FUNCIONES
 	#Imprime la dimension de la matriz
 sub cuadro {
@@ -119,30 +122,61 @@ sub input {
 }
 
 sub Verificar() {
-	print "numero agregado:\n";
-
-	# print $addedNumbers[1][1];
-
 	for (my $i = 0; $i < $level; $i++) {		
 		for(my $j=0; $j < $level; $j++){
 			#defined es un equivalent de null
 			if(defined $addedNumbers[$i][$j]){
 				$valorComparar=$addedNumbers[$i][$j];
 				$correcto=0;
+				print "Numero actual ".$addedNumbers[$i][$j];
 				for (my $columna = 0; $columna < $level; $columna++) {
-					if(defined $addedNumbers[$i][$columna]){
+					if(defined $addedNumbers[$i][$columna] and ($columna != $j)){
+						$definidos++;
+						print "Numero a comparar ". $addedNumbers[$i][$columna];
 						if($valorComparar!=$addedNumbers[$i][$columna]){
 							$correcto++;
+							print $correcto . " en " . $addedNumbers[$i][$columna] . "\n";
 						}
 						else{
 							$correcto=0;
+							print $correcto . "incorrecto en " . $addedNumbers[$i][$columna] . "en".$i.",". $columna."\n";
 						}
 					}
 				}
+				print "Fin de columnas\n";
+				for(my $filas =0; $filas < $level; $filas++){
+					if(defined $addedNumbers[$filas][$j] and ($filas != $i)){
+						$definidos++;
+						print "Numero a comparar ". $addedNumbers[$i][$columna];
+						if($valorComparar!=$addedNumbers[$filas][$j]){
+							$correcto++;
+							print $correcto . " en " . $addedNumbers[$i][$filas] . "\n";
+						}
+						else{
+							$correcto=0;
+							print $correcto . "incorrecto en " . $addedNumbers[$i][$filas] . "en".$i.",". $filas."\n";
+						}
+					}
+				}
+				if($correcto == $definidos){
+					print "Vas bien"
+					# else {n print quieres salir, tienes al menos un errorññ}
+				}
+				else{
+					print "Tienes al menos, un error";
+				}
+				print "¿Quieres seguir jugando? s/n";
+				$continuar=<STDIN>;
+				if($continuar eq $res){
+					return 1;
+				}
+				else{
+					return 0;
+				}
 			}
-		$iIn++;
+		
 		}
-	$jIn++;
+	
 	}
 	#Acepta el valor: print $addedNumbers[2][2];
 }
@@ -215,13 +249,17 @@ sub Plantilla4 {
 	&cuadro(@simbolicPlaces,$level);
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
-	print "¿Ingresar otro número?";
+	print "¿Ingresar otro número? Elija un digito : 1. Si 2. No";
 	my $verificacion = <STDIN>;
 	if($verificacion == 1){
 		&Plantilla4();
 	}
 	else{
-		&Verificar(@addedNumbers);
+		my $continuar= &Verificar(@addedNumbers);
+		print "Continuar :" .$continuar;
+		if($continuar == 0){
+			@addedNumbers=[];
+		}
 	}
 }
 
@@ -319,7 +357,7 @@ sub Instrucciones {
 	print "Para poder jugar este puzzle, deber\240s saber sus reglas:\n";
 	print "Los n\243meros no deben repetirse en fila \242 columna.\n";
 	print "Habr\240 s\241mbolos c\242mo : '<' \242 '>', esto significa, que cada vez que encuentres uno, tendr\240s que poner n\241meros en los cuadros adyacentes que cumplan esta regla, por ejemplo:\n";
-	print "|5|(>)|2|  Aqu\241, esta regla es cumplida, por lo tanto, puedes continuar.\n";
+	print "|5|(>)|2|  Aqu\241, esta regla es cumplida, por lo tanto, ñpuedes continuar.\n";
 	&Menu(1);
 }
 
