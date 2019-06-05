@@ -110,8 +110,8 @@ sub input {
 		print "Ingrese la coordenada en y: ";
 		$v = <STDIN>;
 	}
-	print ")";
-	print $h." h \n v".$v;
+
+	print "( " . h . ",". v.")";
 	
 	do{
 		print "Ingrese el numero que quiere ingresar";
@@ -159,15 +159,15 @@ sub Verificar() {
 					}
 				}
 				if($correcto == $definidos){
-					print "Vas bien"
+					print "Tienes un buen juego!\n"
 					# else {n print quieres salir, tienes al menos un errorññ}
 				}
 				else{
-					print "Tienes al menos, un error";
+					print "Tienes al menos, un error\n";
 				}
-				print "¿Quieres seguir jugando? s/n";
+				print "¿Quieres seguir jugando? s/n ";
 				$continuar=<STDIN>;
-				if($continuar eq $res){
+				if($continuar == "si" || $continuar == "s"){
 					return 1;
 				}
 				else{
