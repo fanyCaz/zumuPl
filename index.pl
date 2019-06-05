@@ -171,7 +171,6 @@ sub Plantilla1 {
 		$verificado=&Verificar(@addedNumbers);
 	}
 }
-
 sub Plantilla2 {
 	@mayorQue = (2000,0,2);
 	@menorQue = (2000,0,1);
@@ -191,7 +190,6 @@ sub Plantilla2 {
 	}
 	
 }
-
 sub Plantilla3 {
 	@mayorQue = (5,0,2);
 	@menorQue = (1000,0,1);
@@ -222,7 +220,7 @@ sub Plantilla4 {
 		for(my $q=0;$q < 4 ; $q++){
 			print "| |";
 		}
-		print "]";
+		print "]\n";
 	}
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
@@ -271,7 +269,6 @@ sub Plantilla6{
 		&Verificar();
 	}
 }
-#1000 es > ; 2000 es < ; # es numeroResiduo
 sub Plantilla7{
 	@mayorQue = ((1000,4,0),(1000,1,4),(1000,4,5));
 	@menorQue = (2000,1,0);
@@ -289,7 +286,6 @@ sub Plantilla7{
 		&Verificar();
 	}
 }
-#1000 es > ; 2000 es < ; # es numeroResiduo
 sub Plantilla8{
 	@mayorQue = (1000,2,0);
 	@menorQue = ((2000,1,2),(2000,4,2),(2000,1,5));
@@ -307,7 +303,8 @@ sub Plantilla8{
 		&Verificar();
 	}
 	#1000 es > ; 2000 es < ; # es numeroResiduo
-}sub Plantilla9{
+}
+sub Plantilla9{
 	@mayorQue = ((1000,1,3),(1000,4,4),(1000,4,5));
 	@menorQue = ((2000,0,1),(2000,1,2),(2000,5,1),(2000,3,4),(2000,1,4),(2000,1,5));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
@@ -324,7 +321,8 @@ sub Plantilla8{
 		&Verificar();
 	}
 	#1000 es > ; 2000 es < ; # es numeroResiduo
-}sub Plantilla10{
+}
+sub Plantilla10{
 	@mayorQue = ((1000,2,1),(1000,0,3),(1000,3,3));
 	@menorQue = ((2000,1,0),(2000,4,0),(2000,4,3),(2000,3,5));
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
