@@ -98,8 +98,8 @@ sub input {
 	#Coordenadas
 	$h=0;
 	$v=0;
-	print "Las coordenadas en x son los lugares en horizontal";
-	print "Las coordenadas en y son los lugares en vertical";
+	print "Las coordenadas en x son los lugares en horizontal\n";
+	print "Las coordenadas en y son los lugares en vertical\n";
 
 	$level=@_[0];
 	print "Ingresa  la coordenada en x: ";
@@ -113,7 +113,7 @@ sub input {
 		$v = <STDIN>;
 	}
 
-	print "( " . h . ",". v.")";
+	print "( " . $h . ",". $v.")";
 	
 	do{
 		print "Ingrese el numero que quiere ingresar";
@@ -161,26 +161,32 @@ sub Verificar() {
 					}
 				}
 				if($correcto == $definidos){
-					print "Tienes un buen juego!\n"
+					print "Tienes un buen juego!\n";
 					# else {n print quieres salir, tienes al menos un errorññ}
-				}
-				else{
-					print "Tienes al menos, un error\n";
-				}
-				print "¿Quieres seguir jugando? s/n ";
-				$continuar=<STDIN>;
-				if($continuar == "si" || $continuar == "s"){
 					return 1;
 				}
 				else{
+					print "Tienes al menos, un error\n";
 					return 0;
 				}
+				# print "¿Quieres seguir jugando? s/n ";
+				# $continuar=<STDIN>;
+				# if($continuar == "si" || $continuar == "s"){
+				# 	return 1;
+				# }
+				# else{
+				# 	return 0;
+				# }
 			}
 		
 		}
 	
 	}
 	#Acepta el valor: print $addedNumbers[2][2];
+}
+
+sub VerificarSimbolic {
+
 }
 #PLANTILLAS
 	#Plantilla 1
@@ -264,16 +270,23 @@ sub Plantilla4 {
 		&Plantilla4();
 	}
 	else{
-		my $continuar= &Verificar(@addedNumbers);
-		print "Continuar :" .$continuar;
-		if($continuar == 0){
-			@addedNumbers=[];
+		my $continuar = &Verificar(@addedNumbers);
+		if ($continuar == 1){
+			my $continuar = &VerificarSimbolic(@addedNumbers);
 		}
+		else{
+			#print lo de que tiene un error
+		}
+		# my $continuar= &Verificar(@addedNumbers);
+		# print "Continuar :" .$continuar;
+		# if($continuar == 0){
+		# 	@addedNumbers=[];
+		# }
 	}
 }
 
 sub Plantilla5{
-	@mayorQue = ((1000,0,0).(1000,0,2));
+	@mayorQue = ((1000,0,0),(1000,0,2));
 	@menorQue = (2000,2,1);
 	@simbolicPlaces = (\@mayorQue,\@menorQue);
 	$level= 4;
