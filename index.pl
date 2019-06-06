@@ -45,7 +45,7 @@ my $comparadores=0;
 sub cuadro {
 	print "  ";
 	for(my $i=1; $i<=$level ; $i++){
-		print "  ".$i." ";
+		print "   ".$i."  ";
 	}
 	print "\n";
 	for(my $i=1; $i <= $level; $i+=1){
@@ -53,13 +53,16 @@ sub cuadro {
 		print "[";
 		for(my $j=1; $j <= $level; $j+=1){
 			if($simbolicPlaces[$i][$j]==2000){
-					print "|  >";
+					print "|    >";
 			}
 			elsif($simbolicPlaces[$i][$j]==1000){
-				print "|  <";
+				print "|    <";
+			}
+			elsif(defined $simbolicPlaces[$i][$j]){
+				print "|   .".$simbolicPlaces[$i][$j];
 			}
 			else{
-				print "|  |";
+				print "|    |";
 				$espacio=0;
 			}
 		}
@@ -70,7 +73,7 @@ sub cuadro {
 sub cuadroConNumeros {
 	print "  ";
 	for(my $i=1; $i<=$level ; $i++){
-		print "  ".$i." ";
+		print "   ".$i."  ";
 	}
 	print "\n";
 	for(my $i=1; $i <= $level; $i+=1){
@@ -81,30 +84,41 @@ sub cuadroConNumeros {
 				if(defined $addedNumbers[$i][$j]){
 					my $print = $addedNumbers[$i][$j];
 					chop $print;     # Match! $str is now in UTF-8 format.
-					print '| '.$print.'>';
+					print '|   '.$print.'>';
 				}
 				else{
-					print "|  >";
+					print "|    >";
 				}
 			}
 			elsif($simbolicPlaces[$i][$j]==1000){
 				if(defined $addedNumbers[$i][$j]){
 					my $print = $addedNumbers[$i][$j];
-					chop $print;     # Match! $str is now in UTF-8 format.
-					print '| '.$print.'<';
+					chop $print;
+					print '|   '.$print.'<';
 				}
 				else{
-					print "|  <";
-				}				
+					print "|    <";
+				}
+			}
+			elsif(defined $simbolicPlaces[$i][$j]){
+				if(defined $addedNumbers[$i][$j]){
+					my $print = $addedNumbers[$i][$j];
+					chop $print;
+					print '| '.$print.".$simbolicPlaces[$i][$j].";
+				}
+				else{
+					print "|    ".$simbolicPlaces[$i][$j];
+				}
+				# print "|  ".$simbolicPlaces[$i][$j];
 			}
 			else{
 				if(defined $addedNumbers[$i][$j]){
 					my $print = $addedNumbers[$i][$j];
 					chop $print;     # Match! $str is now in UTF-8 format.
-					print '| '.$print.'|';
+					print '|   '.$print.'|';
 				}
 				else{
-					print "|  |";
+					print "|    |";
 				}
 			}
 		}
@@ -143,10 +157,6 @@ sub input {
 		print "Los valores permitidos en y son del 1 al $level: ";
 		$v = <STDIN>;
 	}
-
-	my $print = "(  $h , $v )\n";
-	chop $print;
-	print $print;
 	
 	printf "Ingrese el n".chr(163)."mero que quiere ingresar : ";
 	$numero = <STDIN>;
@@ -172,7 +182,7 @@ sub Verificar {
 						# print "LLEGUE AQUI".$j."Y LA I".$i."\n";
 						if($valorComparar==$addedNumbers[$i][$columna]){
 							$repetidos++;
-							print "Tienes al menos, un valor repetido en la fila $i\n";
+							print "\tTienes al menos, un valor repetido en la fila $i\n";
 						}
 					}
 				}
@@ -180,7 +190,7 @@ sub Verificar {
 					if(defined $addedNumbers[$filas][$j] and ($filas != $i)){
 						if($valorComparar==$addedNumbers[$filas][$j]){
 							$repetidos++;
-							print "Tienes al menos, un valor repetido en la columna $j\n";
+							print "\tTienes al menos, un valor repetido en la columna $j\n";
 						}
 					}
 				}
@@ -188,7 +198,7 @@ sub Verificar {
 		
 		}
 		if($repetidos>0){
-			#Quita el break si no junciona scjfalj
+			#Break porque si hay un solo error ya no recorre todo
 			last;
 		}
 	}
@@ -226,6 +236,14 @@ sub VerificarSimbolic {
 						}
 					}
 				}
+				elsif(defined $simbolicPlaces[$i][$j]){
+					if(defined $addedNumbers[$i][$j+1]){
+						if(!(($addedNumbers[$i][$j] - $addedNumbers[$i][$j+1]) == $simbolicPlaces[$i][$j]) || !(($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) == $simbolicPlaces[$i][$j])){
+							$comparadores++;
+							print "Tienes un ERROR en la condici".chr(162)."n entre las casillas [$i][$j] \n";
+						}
+					}
+				}
 			}
 		
 		}
@@ -249,8 +267,8 @@ sub Exit{
 
 sub Win{
 	print chr(173)."Has Ganado esta partida!\n";
-	@addedNumbers=[];
-	print chr(168)."Quieres jugar otra partida? Selecciona '1' si eso deseas, o cualquier tecla para salir";
+	@addedNumbers=();
+	print chr(168)."Quieres jugar otra partida? Selecciona '1' si eso deseas, o cualquier tecla para salir : ";
 	my $continuar=<STDIN>;
 	if($continuar == 1 ){
 		&Menu(0);
@@ -268,6 +286,7 @@ sub Plantilla1 {
 	$simbolicPlaces[2][1]=1000;
 	$simbolicPlaces[3][3]=2000;
 	$simbolicPlaces[4][2]=1000;
+	$simbolicPlaces[4][1]=2;
 	$level = 4;
 	if(@_[0]==0){
 		&cuadro(@simbolicPlaces,$level);
@@ -285,9 +304,7 @@ sub Plantilla1 {
 			else{
 				print chr(173)." Tienes un buen juego !\n";
 			}
-			#- print "verifi".$verificar;
 		}
-
 	}
 	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
 	my $continuar = <STDIN>;
@@ -308,6 +325,7 @@ sub Plantilla2 {
 	$simbolicPlaces[2][1]=2000;
 	$simbolicPlaces[3][3]=1000;
 	$simbolicPlaces[4][3]=2000;
+	$simbolicPlaces[1][3]=2000;
 	$level = 4;
 	if(@_[0]==0){
 		&cuadro(@simbolicPlaces,$level);
@@ -345,6 +363,7 @@ sub Plantilla3 {
 	$simbolicPlaces[1][1]=2000;
 	$simbolicPlaces[2][3]=1000;
 	$simbolicPlaces[3][1]=2000;
+	$simbolicPlaces[4][3]=1000;
 	$level = 4;
 	if(@_[0]==0){
 		&cuadro(@simbolicPlaces,$level);
@@ -372,7 +391,7 @@ sub Plantilla3 {
 	}
 	elsif($continuar==2){
 		&Menu(1);
-		@addedNumbers=[];
+		@addedNumbers=();
 	}
 	else{
 		&Exit();
@@ -591,24 +610,26 @@ sub Plantilla10{
 
 #SCRIPT
 sub Menu {
+	#Vaciar arreglo
+	@addedNumbers=();
 	if(@_[0]==0){
 		print "\n";
 		printf "Instrucciones cortas: ";
 		printf "En 'Mainarizumu' se presenta un tablero vacio\n, en donde tendras que rellenar los recuadros con numeros del 1 hasta el numero de filas que juegues.\n";
 		printf "Habra simbolos como: '>' mayor que, y '<' menor que.\nSi estos s1mbolos conectan dos recuadros, tendras que escribir valores que cumplan esta condicion.\n";
-		printf "Si dos recuadros estan conectados por un numero,\n tendras que escribir valores en estos recuadros que cumplan una resta que de como resultado el numero que se presente.\n";	
+		printf "Si dos recuadros estan conectados por un n".chr(163)."mero,\n tendras que escribir valores en estos recuadros que cumplan una resta que de como resultado el numero que se presente.\n";	
 	}
 	
 	print "Niveles a Jugar: \nNivel 1: 4x4 \nNivel 2: 5x5 \n";
 	#."Nivel 3: 6x6 \n
-	print "Ingresa el dig".chr(161)."to del nivel que quieres jugar: ";
+	print "Ingresa el d".chr(161)."gito del nivel que quieres jugar: ";
 	$nivel=<STDIN>;
 	while($nivel < 1 || $nivel > 2){
 		print "Selecciona un nivel de 1 al 2, porfavor\n";
 		$nivel=<>;
 	}
 	# &Plantilla1();
-	#Llamar a subrutina
+	#Llamar a subrutina para generar numero que eligira tablero
 	$gameToPlay = &numAleatorio();
 	# printf "Número elegido:". $gameToPlay."n";
 	if ($nivel == 1){
@@ -642,10 +663,10 @@ sub Instrucciones {
 	print "\n";
 	printf "Instrucciones.\n";
 	printf "Para poder jugar este puzzle, deber".chr(160)."s saber sus reglas:\n";
-	printf "-En 'Mainarizumu' se presenta un tablero vacio, en donde tendr".chr(160)."s que rellenar los recuadros con numeros del 1 hasta el la cantidad de filas que estes jugando.\n";
+	printf "-En 'Mainarizumu' se presenta un tablero vacio, en donde tendr".chr(160)."s que rellenar los recuadros con numeros del 1 hasta la cantidad de filas que estes jugando.\n";
 	printf "-Los n".chr(163)."meros no deben repetirse en fila ni columna.\n";
 	printf "-Habr".chr(160)." s".chr(161)."mbolos como : '<' o '>', esto significa, que cada vez que encuentres uno, tendr".chr(160)."s que poner n".chr(163)."meros en los cuadros adyacentes que cumplan esta regla.\n";
-	printf "Por ejemplo: |5|(>)|2|  Aqu".chr(161).", esta regla es cumplida, por lo tanto, puedes continuar.\n";
+	printf "\tPor ejemplo: |5|(>)|2|  Aqu".chr(161).", esta regla es cumplida, por lo tanto, puedes continuar.\n";
 	printf "-Puedes cambiar un valor en la cuadr".chr(161)."cula que hayas agregado simplemente volviendo a ingresarlo\n\n";
 	&Menu(1);
 }
