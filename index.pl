@@ -131,13 +131,13 @@ sub input {
 	print "Las coordenadas en y son los lugares en vertical empezando por 1 al $level\n";
 	print "Los valores permitidos en este nivel son del 1 al $level\n";
 	$level=@_[0];
-	print "Ingresa  la coordenada en x: ";
+	print "Ingresa el n".chr(163)."mero de la coordenada en x: ";
 	$h = <STDIN>;
 	while ($h < 1 || $h > $level){
 		print "Los valores permitidos en x son del 1 al $level: ";
 		$h = <STDIN>;
 	}
-	print "Ingresa  la coordenada en y: ";
+	print "Ingresa el n".chr(163)."mero de la coordenada en y: ";
 	$v = <STDIN>;
 	while ($v < 1 || $v > $level){
 		print "Los valores permitidos en y son del 1 al $level: ";
@@ -265,7 +265,9 @@ sub Plantilla1 {
 	$simbolicPlaces[1][1]=2000;
 	$simbolicPlaces[1][2]=2000;
 	$simbolicPlaces[1][3]=2000;
-	$simbolicPlaces[2][1]=2;
+	$simbolicPlaces[2][1]=1000;
+	$simbolicPlaces[3][3]=2000;
+	$simbolicPlaces[4][2]=1000;
 	$level = 4;
 	if(@_[0]==0){
 		&cuadro(@simbolicPlaces,$level);
@@ -287,10 +289,14 @@ sub Plantilla1 {
 		}
 
 	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, o cualquier otra tecla para salir \n";
+	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
 	my $continuar = <STDIN>;
 	if($continuar == 1){
 		&Plantilla1(1);
+	}
+	elsif($continuar==2){
+		&Menu(1);
+		@addedNumbers=[];
 	}
 	else{
 		&Exit();
@@ -322,10 +328,14 @@ sub Plantilla2 {
 			#- print "verifi".$verificar;
 		}
 	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, o cualquier otra tecla para salir \n";
+	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
 	my $continuar = <STDIN>;
 	if($continuar == 1){
 		&Plantilla2(1);
+	}
+	elsif($continuar==2){
+		&Menu(1);
+		@addedNumbers=[];
 	}
 	else{
 		&Exit();
@@ -355,20 +365,25 @@ sub Plantilla3 {
 			#- print "verifi".$verificar;
 		}
 	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, o cualquier otra tecla para salir \n";
+	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
 	my $continuar = <STDIN>;
 	if($continuar == 1){
 		&Plantilla3(1);
+	}
+	elsif($continuar==2){
+		&Menu(1);
+		@addedNumbers=[];
 	}
 	else{
 		&Exit();
 	}
 }
 sub Plantilla4 {
-	@simbolicPlaces[1][1] = 1000;
-	@simbolicPlaces[0][1] = 2000;
-	@simbolicPlaces[2][2] = 2000;
-	@simbolicPlaces[2][3] = 2000;
+	$simbolicPlaces[1][1] = 1000;
+	$simbolicPlaces[2][4] = 1000;
+	$simbolicPlaces[2][2] = 1000;
+	$simbolicPlaces[4][2] = 2000;
+	$simbolicPlaces[4][3] = 1000;
 	$level= 5;
 	if(@_[0]==0){
 		&cuadro(@simbolicPlaces,$level);
@@ -389,19 +404,24 @@ sub Plantilla4 {
 			#- print "verifi".$verificar;
 		}
 	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, o cualquier otra tecla para salir \n";
+	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
 	my $continuar = <STDIN>;
 	if($continuar == 1){
-		&Plantilla3(1);
+		&Plantilla4(1);
+	}
+	elsif($continuar==2){
+		&Menu(1);
+		@addedNumbers=[];
 	}
 	else{
 		&Exit();
 	}
 }
 sub Plantilla5{
-	@simbolicPlaces[1][3] = 1000;
-	@simbolicPlaces[0][1] = 2000;
-	@simbolicPlaces[2][1] = 2000;
+	$simbolicPlaces[1][2] = 1000;
+	$simbolicPlaces[2][3] = 2000;
+	$simbolicPlaces[4][2] = 2000;
+	$simbolicPlaces[1][4] = 1000;
 	$level = 5;
 	if(@_[0]==0){
 		&cuadro(@simbolicPlaces,$level);
@@ -422,38 +442,54 @@ sub Plantilla5{
 			#- print "verifi".$verificar;
 		}
 	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, o cualquier otra tecla para salir \n";
+	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
 	my $continuar = <STDIN>;
 	if($continuar == 1){
-		&Plantilla3(1);
+		&Plantilla5(1);
+	}
+	elsif($continuar==2){
+		&Menu(1);
+		@addedNumbers=[];
 	}
 	else{
 		&Exit();
 	}
 }
 sub Plantilla6{
-	@mayorQue = ((1000,1,4),(1000,3,5));
-	@menorQue = (2000,1,1);
-	@simbolicPlaces[1][1] = 1000;
-	@simbolicPlaces[2][1] = 
-	$level= 5;
-	&cuadro(@simbolicPlaces,$level);
-		for($p=0;$p<5;$p++){
-		print "[";
-		for(my $q=0;$q < 5 ; $q++){
-			print "| |";
-		}
-		print "]\n";
+	$simbolicPlaces[1][3] = 1000;
+	$simbolicPlaces[1][2] = 2000;
+	$simbolicPlaces[2][1] = 2000;
+	$level = 5;
+	if(@_[0]==0){
+		&cuadro(@simbolicPlaces,$level);
 	}
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
-	print "¿Ingresar otro número?";
-	my $verificacion = <STDIN>;
-	if($verificacion == 1){
-		&Plantilla6();
+	&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
+	my $verificar = &Verificar(@addedNumbers);
+	if($verificar == 1){
+		my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
+		if($verificar > 0){
+			if($verificar == ($level*$level)){
+				&Win();
+			}
+			else{
+				print chr(173)." Tienes un buen juego !\n";
+			}
+			#- print "verifi".$verificar;
+		}
+	}
+	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
+	my $continuar = <STDIN>;
+	if($continuar == 1){
+		&Plantilla6(1);
+	}
+	elsif($continuar==2){
+		&Menu(1);
+		@addedNumbers=[];
 	}
 	else{
-		&Verificar();
+		&Exit();
 	}
 }
 sub Plantilla7{ #Imprime el las dimensiones y+1
@@ -556,18 +592,19 @@ sub Plantilla10{
 #SCRIPT
 sub Menu {
 	if(@_[0]==0){
+		print "\n";
 		printf "Instrucciones cortas: ";
 		printf "En 'Mainarizumu' se presenta un tablero vacio\n, en donde tendras que rellenar los recuadros con numeros del 1 hasta el numero de filas que juegues.\n";
 		printf "Habra simbolos como: '>' mayor que, y '<' menor que.\nSi estos s1mbolos conectan dos recuadros, tendras que escribir valores que cumplan esta condicion.\n";
 		printf "Si dos recuadros estan conectados por un numero,\n tendras que escribir valores en estos recuadros que cumplan una resta que de como resultado el numero que se presente.\n";	
 	}
 	
-	print "Niveles a Jugar: \n"."Nivel 1: 4x4 \n";
-	# \n"."Nivel 2: 5x5 \n"."Nivel 3: 6x6 \n
-	print "Ingresa el nivel que quieres jugar: ";
+	print "Niveles a Jugar: \nNivel 1: 4x4 \nNivel 2: 5x5 \n";
+	#."Nivel 3: 6x6 \n
+	print "Ingresa el dig".chr(161)."to del nivel que quieres jugar: ";
 	$nivel=<STDIN>;
-	while($nivel < 1 || $nivel > 3){
-		print "Selecciona un nivel de 1 al 3, porfavor\n";
+	while($nivel < 1 || $nivel > 2){
+		print "Selecciona un nivel de 1 al 2, porfavor\n";
 		$nivel=<>;
 	}
 	# &Plantilla1();
@@ -585,9 +622,17 @@ sub Menu {
 			&Plantilla3(0);
 		}
 	}
-	# elsif ($nivel == 2){
-	# 	print "Nivel 2: ";
-	# }
+	elsif ($nivel == 2){
+		if($gameToPlay > 21){
+			&Plantilla4(0);
+		}
+		elsif($gameToPlay > 11){
+			&Plantilla5(0);
+		}
+		else{
+			&Plantilla6(0);
+		}
+	}
 	# else {
 	# 	print "Nivel 3: ";
 	# }
@@ -596,8 +641,8 @@ sub Menu {
 sub Instrucciones {
 	print "\n";
 	printf "Instrucciones.\n";
-	printf "Para poder jugar este puzzle, deberás saber sus reglas:\n";
-	printf "-En 'Mainarizumu' se presenta un tablero vacio\n, en donde tendras que rellenar los recuadros con numeros del 1 hasta el numero de filas que juegues.\n";
+	printf "Para poder jugar este puzzle, deber".chr(160)."s saber sus reglas:\n";
+	printf "-En 'Mainarizumu' se presenta un tablero vacio, en donde tendr".chr(160)."s que rellenar los recuadros con numeros del 1 hasta el la cantidad de filas que estes jugando.\n";
 	printf "-Los n".chr(163)."meros no deben repetirse en fila ni columna.\n";
 	printf "-Habr".chr(160)." s".chr(161)."mbolos como : '<' o '>', esto significa, que cada vez que encuentres uno, tendr".chr(160)."s que poner n".chr(163)."meros en los cuadros adyacentes que cumplan esta regla.\n";
 	printf "Por ejemplo: |5|(>)|2|  Aqu".chr(161).", esta regla es cumplida, por lo tanto, puedes continuar.\n";
@@ -613,7 +658,7 @@ if($respuesta == 1){
 	&Instrucciones();
 }
 elsif($respuesta == 2){
-	&Menu(0);
+	&Menu(1);
 }
 else{
 	&Exit();
