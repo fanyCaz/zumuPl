@@ -223,7 +223,7 @@ sub VerificarSimbolic {
 					if(defined $addedNumbers[$i][$j+1]){
 						if($addedNumbers[$i][$j] < $addedNumbers[$i][$j+1]){
 							$comparadores++;
-							print "\tTienes un error en la condici".chr(162)."n entre las casillas [$i][$j] \n";
+							print "\tTienes un error en la condici".chr(162)."n en un signo de inequidad\n";
 						}
 					}
 				}
@@ -231,25 +231,17 @@ sub VerificarSimbolic {
 					if(defined $addedNumbers[$i][$j+1]){
 						if($addedNumbers[$i][$j] > $addedNumbers[$i][$j+1]){
 							$comparadores++;
-							print "\tTienes un error en la condici".chr(162)."n entre las casillas [$i][$j] \n";
+							print "\tTienes un error en la condici".chr(162)."n en un signo de inequidad\n";
 						}
 					}
 				}
 				elsif(defined $simbolicPlaces[$i][$j]){
 					if(defined $addedNumbers[$i][$j+1]){
-
-						if((($addedNumbers[$i][$j] - $addedNumbers[$i][$j+1]) != $simbolicPlaces[$i][$j]) and  (($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) != $simbolicPlaces[$i][$j]) ){
-							# or  ($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) != $simbolicPlaces[$i][$j] 
-							# or !(($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) == $simbolicPlaces[$i][$j])
+						if((($addedNumbers[$i][$j] - $addedNumbers[$i][$j+1]) != $simbolicPlaces[$i][$j]) and (($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) != $simbolicPlaces[$i][$j]) ){
 							$comparadores++;
-							print "resta:".($addedNumbers[$i][$j]-$addedNumbers[$i][$j+1])."\n";
-							print "\tTienes un DE 1 A 2 en la condici".chr(162)."n entre las casillas [$i][$j] \n";
+							# print "resta:".($addedNumbers[$i][$j]-$addedNumbers[$i][$j+1])."\n";
+							print "\tLa resta entre dos numeros adyacentes no es igual al numero del tablero\n";
 						}
-						# elsif(($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) != $simbolicPlaces[$i][$j]){
-						# 	$comparadores++;
-						# 	print "resta:".($addedNumbers[$i][$j+1]-$addedNumbers[$i][$j])."\n";
-						# 	print "\tTienes un DE 2 A 1  en la condici".chr(162)."n entre las casillas [$i][$j] \n";
-						# }
 					}
 				}
 			}
@@ -486,10 +478,12 @@ sub Plantilla3 {
 }
 sub Plantilla4 {
 	$simbolicPlaces[1][1] = 1000;
-	$simbolicPlaces[2][4] = 1000;
 	$simbolicPlaces[2][2] = 1000;
+	$simbolicPlaces[2][4] = 1000;
+	$simbolicPlaces[3][3] = 2;
 	$simbolicPlaces[4][2] = 2000;
 	$simbolicPlaces[4][3] = 1000;
+	$simbolicPlaces[5][1] = 1;
 	$level= 5;
 	if(@_[0]==0){
 		&cuadro(@simbolicPlaces,$level);
@@ -497,37 +491,56 @@ sub Plantilla4 {
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
-	my $verificar = &Verificar(@addedNumbers);
-	if($verificar == 1){
-		my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
-		if($verificar > 0){
-			if($verificar == ($level*$level)){
-				&Win();
-			}
-			else{
-				print chr(173)." Tienes un buen juego !\n";
-			}
-			#- print "verifi".$verificar;
-		}
+
+	#VERIFICACION POR USUARIO
+	printf "\n".chr(168)."Desea seguir jugando?\n";
+	printf "Seleccione el d".chr(161)."gito para su decision:\n";
+	printf "1. Continuar jugando\n2. Comprobar el puzzle\n3. Regresar a Menu\n";
+	my $continuar=<STDIN>;
+	while($continuar < 1 || $continuar > 3){
+		print "Seleccione un n".chr(163)."mero v".chr(160)."lido del men".chr(163).", porfavor";
+		$continuar=<STDIN>;
 	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
-	my $continuar = <STDIN>;
 	if($continuar == 1){
 		&Plantilla4(1);
 	}
-	elsif($continuar==2){
-		&Menu(1);
-		@addedNumbers=[];
+	elsif($continuar == 2 ){
+		my $verificar = &Verificar(@addedNumbers);
+		if($verificar == 1){
+			my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
+			if($verificar > 0){
+				if($verificar == ($level*$level)){
+					&Win();
+				}
+				else{
+					print "\t".chr(173)." Excelente ! No has tenido errores\n\n";
+					&Plantilla4(1);
+				}
+			}
+			else{
+				&Plantilla4(1);
+			}
+		}
+		else{
+			&Plantilla4(1);
+		}
 	}
 	else{
-		&Exit();
+		system("cls");
+		&Menu(1);
+		@addedNumbers=();
 	}
+	#FIN VERIFICACION POR USUARIO
 }
 sub Plantilla5{
-	$simbolicPlaces[1][2] = 1000;
-	$simbolicPlaces[2][3] = 2000;
-	$simbolicPlaces[4][2] = 2000;
-	$simbolicPlaces[1][4] = 1000;
+	$simbolicPlaces[1][2] = 2000;
+	$simbolicPlaces[1][3] = 1000;
+	$simbolicPlaces[2][4] = 2;
+	$simbolicPlaces[3][2] = 1;
+	$simbolicPlaces[4][1] = 2000;
+	$simbolicPlaces[4][3] = 2000;
+	$simbolicPlaces[5][2] = 3;
+	
 	$level = 5;
 	if(@_[0]==0){
 		&cuadro(@simbolicPlaces,$level);
@@ -535,68 +548,103 @@ sub Plantilla5{
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
-	my $verificar = &Verificar(@addedNumbers);
-	if($verificar == 1){
-		my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
-		if($verificar > 0){
-			if($verificar == ($level*$level)){
-				&Win();
-			}
-			else{
-				print chr(173)." Tienes un buen juego !\n";
-			}
-			#- print "verifi".$verificar;
-		}
+
+	#VERIFICACION POR USUARIO
+	printf "\n".chr(168)."Desea seguir jugando?\n";
+	printf "Seleccione el d".chr(161)."gito para su decision:\n";
+	printf "1. Continuar jugando\n2. Comprobar el puzzle\n3. Regresar a Menu\n";
+	my $continuar=<STDIN>;
+	while($continuar < 1 || $continuar > 3){
+		print "Seleccione un n".chr(163)."mero v".chr(160)."lido del men".chr(163).", porfavor";
+		$continuar=<STDIN>;
 	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
-	my $continuar = <STDIN>;
 	if($continuar == 1){
 		&Plantilla5(1);
 	}
-	elsif($continuar==2){
-		&Menu(1);
-		@addedNumbers=[];
+	elsif($continuar == 2 ){
+		my $verificar = &Verificar(@addedNumbers);
+		if($verificar == 1){
+			my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
+			if($verificar > 0){
+				if($verificar == ($level*$level)){
+					&Win();
+				}
+				else{
+					print "\t".chr(173)." Excelente ! No has tenido errores\n\n";
+					&Plantilla5(1);
+				}
+			}
+			else{
+				&Plantilla5(1);
+			}
+		}
+		else{
+			&Plantilla5(1);
+		}
 	}
 	else{
-		&Exit();
+		system("cls");
+		&Menu(1);
+		@addedNumbers=();
 	}
+	#FIN VERIFICACION POR USUARIO
 }
 sub Plantilla6{
-	$simbolicPlaces[1][3] = 1000;
-	$simbolicPlaces[1][2] = 2000;
-	$simbolicPlaces[2][1] = 2000;
+	$simbolicPlaces[1][1] = 1000;
+	$simbolicPlaces[1][4] = 2000;
+	$simbolicPlaces[2][2] = 3;
+	$simbolicPlaces[3][3] = 1;
+	$simbolicPlaces[4][1] = 2000;
+	$simbolicPlaces[5][1] = 2;
+	$simbolicPlaces[5][4] = 2000;
+
 	$level = 5;
-	if(@_[0]==0){
+		if(@_[0]==0){
 		&cuadro(@simbolicPlaces,$level);
 	}
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
-	my $verificar = &Verificar(@addedNumbers);
-	if($verificar == 1){
-		my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
-		if($verificar > 0){
-			if($verificar == ($level*$level)){
-				&Win();
-			}
-			else{
-				print chr(173)." Tienes un buen juego !\n";
-			}
-			#- print "verifi".$verificar;
-		}
+
+	#VERIFICACION POR USUARIO
+	printf "\n".chr(168)."Desea seguir jugando?\n";
+	printf "Seleccione el d".chr(161)."gito para su decision:\n";
+	printf "1. Continuar jugando\n2. Comprobar el puzzle\n3. Regresar a Menu\n";
+	my $continuar=<STDIN>;
+	while($continuar < 1 || $continuar > 3){
+		print "Seleccione un n".chr(163)."mero v".chr(160)."lido del men".chr(163).", porfavor";
+		$continuar=<STDIN>;
 	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
-	my $continuar = <STDIN>;
 	if($continuar == 1){
 		&Plantilla6(1);
 	}
-	elsif($continuar==2){
-		&Menu(1);
-		@addedNumbers=[];
+	elsif($continuar == 2 ){
+		my $verificar = &Verificar(@addedNumbers);
+		if($verificar == 1){
+			my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
+			if($verificar > 0){
+				if($verificar == ($level*$level)){
+					&Win();
+				}
+				else{
+					print "\t".chr(173)." Excelente ! No has tenido errores\n\n";
+					&Plantilla6(1);
+				}
+			}
+			else{
+				&Plantilla6(1);
+			}
+		}
+		else{
+			&Plantilla6(1);
+		}
 	}
 	else{
-		&Exit();
+		system("cls");
+		&Menu(1);
+		@addedNumbers=();
 	}
+	#FIN VERIFICACION POR USUARIO
 }
 # sub Plantilla7{ #Imprime el las dimensiones y+1
 # 	@mayorQue = ((1000,4,0),(1000,1,4),(1000,4,5));
@@ -699,7 +747,6 @@ sub Plantilla6{
 sub SelectGame {
 	#Vaciar arreglo
 	print "Niveles a Jugar: \nNivel 1: 4x4 \nNivel 2: 5x5 \n";
-	#."Nivel 3: 6x6 \n
 	print "Ingresa el d".chr(161)."gito del nivel que quieres jugar : ";
 	$nivel=<STDIN>;
 	while($nivel < 1 || $nivel > 2){
