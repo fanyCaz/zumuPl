@@ -140,9 +140,9 @@ sub input {
 	#Coordenadas
 	$h=0;
 	$v=0;
-	print "Las coordenadas en x son los lugares en horizontal empezando por 1 al $level\n";
-	print "Las coordenadas en y son los lugares en vertical empezando por 1 al $level\n";
-	print "Los valores permitidos en este nivel son del 1 al $level\n";
+	print "La coordenadas en x es la fila (horizontal) empezando por 1 al $level\n";
+	print "La coordenadas en y es la columna (vertical) empezando por 1 al $level\n";
+	print "Los valores permitidos a ingresar en este nivel son del 1 al $level\n";
 	$level=@_[0];
 	print "Ingresa el n".chr(163)."mero de la coordenada en x: ";
 	$h = <STDIN>;
@@ -237,18 +237,17 @@ sub VerificarSimbolic {
 				}
 				elsif(defined $simbolicPlaces[$i][$j]){
 					if(defined $addedNumbers[$i][$j+1]){
-						if(!(($addedNumbers[$i][$j] - $addedNumbers[$i][$j+1]) == $simbolicPlaces[$i][$j])){
+						if(($addedNumbers[$i][$j] - $addedNumbers[$i][$j+1]) != $simbolicPlaces[$i][$j]  or  ($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) != $simbolicPlaces[$i][$j] ){
 							# or !(($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) == $simbolicPlaces[$i][$j])
 							$comparadores++;
 							print $addedNumbers[$i][$j]."-".$addedNumbers[$i][$j+1]."=".$simbolicPlaces[$i][$j]."\n";
-							print $addedNumbers[$i][$j+1]."-".$addedNumbers[$i][$j]."=".$simbolicPlaces[$i][$j]."\n";
-							print "\tTienes un error en la condici".chr(162)."n entre las casillas [$i][$j] \n";
+							print "\tTienes un DE 1 A 2 en la condici".chr(162)."n entre las casillas [$i][$j] \n";
 						}
-						elsif(!(($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) == ((-1)*$simbolicPlaces[$i][$j]))){
-							$comparadores++;
-							print $addedNumbers[$i][$j+1]."-".$addedNumbers[$i][$j]."=".$simbolicPlaces[$i][$j]."\n";
-							print "\tTienes un error en la condici".chr(162)."n entre las casillas [$i][$j] \n";
-						}
+						# elsif(($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) != $simbolicPlaces[$i][$j]){
+						# 	$comparadores++;
+						# 	print $addedNumbers[$i][$j+1]."-".$addedNumbers[$i][$j]."=".$simbolicPlaces[$i][$j]."\n";
+						# 	print "\tTienes un DE 2 A 1  en la condici".chr(162)."n entre las casillas [$i][$j] \n";
+						# }
 					}
 				}
 			}
@@ -464,7 +463,7 @@ sub Plantilla3 {
 					&Win();
 				}
 				else{
-					print "\t".chr(173)." Excelente ! No has tenido errores\n\n";
+					print "\t".chr(173)." Excelente ! No has tenido errores\n\n";#agregar pergunat de volver a jugar? lol
 					&Plantilla3(1);
 				}
 			}
