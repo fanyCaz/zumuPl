@@ -17,8 +17,6 @@ my $sawInstructions;
 my $verificado;
 my $n=1;
 my $x=1;
-my @mayorQue;
-my @menorQue;
 my @residuo;
 my $espacio;
 my @simbolicPlaces;
@@ -83,8 +81,8 @@ sub cuadroConNumeros {
 			if($simbolicPlaces[$i][$j]==2000){
 				if(defined $addedNumbers[$i][$j]){
 					my $print = $addedNumbers[$i][$j];
-					chop $print;     # Match! $str is now in UTF-8 format.
-					print '|   '.$print.'>';
+					chop $print;
+					print '|  '.$print.' >';
 				}
 				else{
 					print "|    >";
@@ -94,7 +92,7 @@ sub cuadroConNumeros {
 				if(defined $addedNumbers[$i][$j]){
 					my $print = $addedNumbers[$i][$j];
 					chop $print;
-					print '|   '.$print.'<';
+					print '|  '.$print.' <';
 				}
 				else{
 					print "|    <";
@@ -104,7 +102,7 @@ sub cuadroConNumeros {
 				if(defined $addedNumbers[$i][$j]){
 					my $print = $addedNumbers[$i][$j];
 					chop $print;
-					print '| '.$print.".$simbolicPlaces[$i][$j].";
+					print '| '.$print." .$simbolicPlaces[$i][$j]";
 				}
 				else{
 					print "|    ".$simbolicPlaces[$i][$j];
@@ -115,7 +113,7 @@ sub cuadroConNumeros {
 				if(defined $addedNumbers[$i][$j]){
 					my $print = $addedNumbers[$i][$j];
 					chop $print;     # Match! $str is now in UTF-8 format.
-					print '|   '.$print.'|';
+					print '|  '.$print.' |';
 				}
 				else{
 					print "|    |";
@@ -238,9 +236,10 @@ sub VerificarSimbolic {
 				}
 				elsif(defined $simbolicPlaces[$i][$j]){
 					if(defined $addedNumbers[$i][$j+1]){
-						if(!(($addedNumbers[$i][$j] - $addedNumbers[$i][$j+1]) == $simbolicPlaces[$i][$j]) || !(($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) == $simbolicPlaces[$i][$j])){
+						if(!(($addedNumbers[$i][$j] - $addedNumbers[$i][$j+1]) == $simbolicPlaces[$i][$j] or !(($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) == $simbolicPlaces[$i][$j])    )){
 							$comparadores++;
-							print "Tienes un ERROR en la condici".chr(162)."n entre las casillas [$i][$j] \n";
+							# print $addedNumbers[$i][$j]."-".$addedNumbers[$i][$j+1]."=".$simbolicPlaces[$i][$j];
+							print "Tienes un error en la condici".chr(162)."n entre las casillas [$i][$j] \n";
 						}
 					}
 				}
@@ -268,10 +267,10 @@ sub Exit{
 sub Win{
 	print chr(173)."Has Ganado esta partida!\n";
 	@addedNumbers=();
-	print chr(168)."Quieres jugar otra partida? Selecciona '1' si eso deseas, o cualquier tecla para salir : ";
+	print chr(168)."Quieres jugar otra vez? Selecciona '1' si eso deseas, o cualquier tecla para salir : ";
 	my $continuar=<STDIN>;
 	if($continuar == 1 ){
-		&Menu(0);
+		&Menu(1);
 	}
 	else{
 		&Exit();
@@ -294,6 +293,7 @@ sub Plantilla1 {
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
+	
 	my $verificar = &Verificar(@addedNumbers);
 	if($verificar == 1){
 		my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
@@ -322,10 +322,12 @@ sub Plantilla1 {
 
 sub Plantilla2 {
 	$simbolicPlaces[1][1]=1000;
+	$simbolicPlaces[1][3]=2000;
 	$simbolicPlaces[2][1]=2000;
 	$simbolicPlaces[3][3]=1000;
-	$simbolicPlaces[4][3]=2000;
-	$simbolicPlaces[1][3]=2000;
+	$simbolicPlaces[4][3]=2000; 
+
+	
 	$level = 4;
 	if(@_[0]==0){
 		&cuadro(@simbolicPlaces,$level);
@@ -511,111 +513,113 @@ sub Plantilla6{
 		&Exit();
 	}
 }
-sub Plantilla7{ #Imprime el las dimensiones y+1
-	@mayorQue = ((1000,4,0),(1000,1,4),(1000,4,5));
-	@menorQue = (2000,1,0);
-	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 5;
-	&cuadro(@simbolicPlaces,$level);
-	for($p=0;$p<5;$p++){
-		print "[";
-		for(my $q=0;$q < 5 ; $q++){
-			print "| |";
-		}
-		print "]\n";
-	}
-	@coordenadas=input($level);
-	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
-	print "¿Ingresar otro número?";
-	my $verificacion = <STDIN>;
-	if($verificacion == 1){
-		&Plantilla7();
-	}
-	else{
-		&Verificar();
-	}
-}
-sub Plantilla8{
-	@mayorQue = (1000,2,0);
-	@menorQue = ((2000,1,2),(2000,4,2),(2000,1,5));
-	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 5;
-	&cuadro(@simbolicPlaces,$level);
-		for($p=0;$p<6;$p++){
-		print "[";
-		for(my $q=0;$q < 5 ; $q++){
-			print "| |";
-		}
-		print "]\n";
-	}
-	@coordenadas=input($level);
-	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
-	print "¿Ingresar otro número?";
-	my $verificacion = <STDIN>;
-	if($verificacion == 1){
-		&Plantilla8();
-	}
-	else{
-		&Verificar();
-	}
-}
-sub Plantilla9{
-	@mayorQue = ((1000,1,3),(1000,4,4),(1000,4,5));
-	@menorQue = ((2000,0,1),(2000,1,2),(2000,5,1),(2000,3,4),(2000,1,4),(2000,1,5));
-	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 6;
-	&cuadro(@simbolicPlaces,$level);
-		for($p=0;$p<6;$p++){
-		print "[";
-		for(my $q=0;$q < 6 ; $q++){
-			print "| |";
-		}
-		print "]\n";
-	}
-	@coordenadas=input($level);
-	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
-	print "¿Ingresar otro número?";
-	my $verificacion = <STDIN>;
-	if($verificacion == 1){
-		&Plantilla9();
-	}
-	else{
-		&Verificar();
-	}
-}
-sub Plantilla10{
-	@mayorQue = ((1000,2,1),(1000,0,3),(1000,3,3));
-	@menorQue = ((2000,1,0),(2000,4,0),(2000,4,3),(2000,3,5));
-	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 6;
-	&cuadro(@simbolicPlaces,$level);
-		for($p=0;$p<6;$p++){
-		print "[";
-		for(my $q=0;$q < 6 ; $q++){
-			print "| |";
-		}
-		print "]\n";
-	}
-	@coordenadas=input($level);
-	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
-	print "¿Ingresar otro número?";
-	my $verificacion = <STDIN>;
-	if($verificacion == 1){
-		&Plantilla10();
-	}
-	else{
-		&Verificar();
-	}
-}
+# sub Plantilla7{ #Imprime el las dimensiones y+1
+# 	@mayorQue = ((1000,4,0),(1000,1,4),(1000,4,5));
+# 	@menorQue = (2000,1,0);
+# 	@simbolicPlaces = (\@mayorQue,\@menorQue);
+# 	$level= 5;
+# 	&cuadro(@simbolicPlaces,$level);
+# 	for($p=0;$p<5;$p++){
+# 		print "[";
+# 		for(my $q=0;$q < 5 ; $q++){
+# 			print "| |";
+# 		}
+# 		print "]\n";
+# 	}
+# 	@coordenadas=input($level);
+# 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+# 	print "¿Ingresar otro número?";
+# 	my $verificacion = <STDIN>;
+# 	if($verificacion == 1){
+# 		&Plantilla7();
+# 	}
+# 	else{
+# 		&Verificar();
+# 	}
+# }
+# sub Plantilla8{
+# 	@mayorQue = (1000,2,0);
+# 	@menorQue = ((2000,1,2),(2000,4,2),(2000,1,5));
+# 	@simbolicPlaces = (\@mayorQue,\@menorQue);
+# 	$level= 5;
+# 	&cuadro(@simbolicPlaces,$level);
+# 		for($p=0;$p<6;$p++){
+# 		print "[";
+# 		for(my $q=0;$q < 5 ; $q++){
+# 			print "| |";
+# 		}
+# 		print "]\n";
+# 	}
+# 	@coordenadas=input($level);
+# 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+# 	print "¿Ingresar otro número?";
+# 	my $verificacion = <STDIN>;
+# 	if($verificacion == 1){
+# 		&Plantilla8();
+# 	}
+# 	else{
+# 		&Verificar();
+# 	}
+# }
+# sub Plantilla9{
+# 	@mayorQue = ((1000,1,3),(1000,4,4),(1000,4,5));
+# 	@menorQue = ((2000,0,1),(2000,1,2),(2000,5,1),(2000,3,4),(2000,1,4),(2000,1,5));
+# 	@simbolicPlaces = (\@mayorQue,\@menorQue);
+# 	$level= 6;
+# 	&cuadro(@simbolicPlaces,$level);
+# 		for($p=0;$p<6;$p++){
+# 		print "[";
+# 		for(my $q=0;$q < 6 ; $q++){
+# 			print "| |";
+# 		}
+# 		print "]\n";
+# 	}
+# 	@coordenadas=input($level);
+# 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+# 	print "¿Ingresar otro número?";
+# 	my $verificacion = <STDIN>;
+# 	if($verificacion == 1){
+# 		&Plantilla9();
+# 	}
+# 	else{
+# 		&Verificar();
+# 	}
+# }
+# sub Plantilla10{
+# 	@mayorQue = ((1000,2,1),(1000,0,3),(1000,3,3));
+# 	@menorQue = ((2000,1,0),(2000,4,0),(2000,4,3),(2000,3,5));
+# 	@simbolicPlaces = (\@mayorQue,\@menorQue);
+# 	$level= 6;
+# 	&cuadro(@simbolicPlaces,$level);
+# 		for($p=0;$p<6;$p++){
+# 		print "[";
+# 		for(my $q=0;$q < 6 ; $q++){
+# 			print "| |";
+# 		}
+# 		print "]\n";
+# 	}
+# 	@coordenadas=input($level);
+# 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
+# 	print "¿Ingresar otro número?";
+# 	my $verificacion = <STDIN>;
+# 	if($verificacion == 1){
+# 		&Plantilla10();
+# 	}
+# 	else{
+# 		&Verificar();
+# 	}
+# }
 
 #SCRIPT
 sub Menu {
 	#Vaciar arreglo
 	@addedNumbers=();
+	@simbolicPlaces=();
+	print "\n\t\t...Men".chr(163)."...\n";
 	if(@_[0]==0){
 		print "\n";
 		printf "Instrucciones cortas: ";
-		printf "En 'Mainarizumu' se presenta un tablero vacio\n, en donde tendras que rellenar los recuadros con numeros del 1 hasta el numero de filas que juegues.\n";
+		printf "En 'Mainarizumu' se presenta un tablero vacio, en donde tendras que rellenar los recuadros con numeros del 1 hasta el numero de filas que juegues.\n";
 		printf "Habra simbolos como: '>' mayor que, y '<' menor que.\nSi estos s1mbolos conectan dos recuadros, tendras que escribir valores que cumplan esta condicion.\n";
 		printf "Si dos recuadros estan conectados por un n".chr(163)."mero,\n tendras que escribir valores en estos recuadros que cumplan una resta que de como resultado el numero que se presente.\n";	
 	}
@@ -631,7 +635,7 @@ sub Menu {
 	# &Plantilla1();
 	#Llamar a subrutina para generar numero que eligira tablero
 	$gameToPlay = &numAleatorio();
-	# printf "Número elegido:". $gameToPlay."n";
+	printf "Número elegido:". $gameToPlay."\n";
 	if ($nivel == 1){
 		if($gameToPlay > 21){
 			&Plantilla1(0);
@@ -673,7 +677,7 @@ sub Instrucciones {
 
 #SCRIPT
 print "MAINARIZUMU \n";
-printf "Presione '1' si eres Nuevo Jugador. Presione '2' si quieres Jugar una nueva partida, o cualquier otra tecla si deseas salir.\n";
+printf "Presione '1' si eres Nuevo Jugador.\nPresione '2' si quieres Jugar una nueva partida, o cualquier otra tecla si deseas salir.\n";
 $respuesta=<STDIN>;
 if($respuesta == 1){
 	&Instrucciones();
