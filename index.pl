@@ -261,7 +261,7 @@ sub VerificarSimbolic {
 }
 
 sub Exit{
-	my $exit = <STDIN>;
+	exit();
 }
 
 sub Win{
@@ -276,6 +276,7 @@ sub Win{
 		&Exit();
 	}
 }
+
 #PLANTILLAS
 	#1000 es > ; 2000 es < ; # es numeroResiduo
 sub Plantilla1 {
@@ -293,31 +294,71 @@ sub Plantilla1 {
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
-	
-	my $verificar = &Verificar(@addedNumbers);
-	if($verificar == 1){
-		my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
-		if($verificar > 0){
-			if($verificar == ($level*$level)){
-				&Win();
-			}
-			else{
-				print chr(173)." Tienes un buen juego !\n";
-			}
-		}
-	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
+
+	#VERIFICACION POR USUARIO
+	printf "\n".chr(168)."Desea seguir jugando?\n";
+	printf "Seleccione el digito para su decision:\n";
+	printf "1. Continuar jugando\n2. Comprobar el puzzle\n3. Regresar a Menu\n";
 	my $continuar = <STDIN>;
 	if($continuar == 1){
 		&Plantilla1(1);
 	}
-	elsif($continuar==2){
-		&Menu(1);
-		@addedNumbers=[];
+	elsif($continuar == 2 ){
+		my $verificar = &Verificar(@addedNumbers);
+		if($verificar == 1){
+			my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
+			if($verificar > 0){
+				if($verificar == ($level*$level)){
+					&Win();
+				}
+				else{
+					print "\t".chr(173)." Excelente ! No has tenido errores\n";
+					&Plantilla1(1);
+				}
+			}
+			else{
+				&Plantilla1(1);
+			}
+		}
+		else{
+			&Plantilla1(1);
+		}
 	}
 	else{
-		&Exit();
+		&Menu(1);
+		@addedNumbers=();
 	}
+	#FIN VERIFICACION POR USUARIO
+
+	#VERIFICACION AUTOMATICA
+
+	# my $verificar = &Verificar(@addedNumbers);
+	# if($verificar == 1){
+	# 	my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
+	# 	if($verificar > 0){
+	# 		if($verificar == ($level*$level)){
+	# 			&Win();
+	# 		}
+	# 		else{
+	# 			print chr(173)." Tienes un buen juego !\n";
+	# 		}
+	# 	}
+	# }
+	# printf chr(168)."Desea seguir jugando?\n";
+	# printf "Seleccione el digito para su decision:\n";
+	# printf "1. Continuar jugando\n2. Volver al menu\n 3., o cualquier otra tecla para salir \n";
+	# my $continuar = <STDIN>;
+	# if($continuar == 1){
+	# 	&Plantilla1(1);
+	# }
+	# elsif($continuar==2){
+	# 	&Menu(1);
+	# 	@addedNumbers=[];
+	# }
+	# else{
+	# 	&Exit();
+	# }
+	#FIN VERIFICACION AUTOMATICA
 }
 
 sub Plantilla2 {
@@ -335,31 +376,40 @@ sub Plantilla2 {
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
-	my $verificar = &Verificar(@addedNumbers);
-	if($verificar == 1){
-		my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
-		if($verificar > 0){
-			if($verificar == ($level*$level)){
-				&Win();
-			}
-			else{
-				print chr(173)." Tienes un buen juego !\n";
-			}
-			#- print "verifi".$verificar;
-		}
-	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
+	#VERIFICACION POR USUARIO
+	printf "\n".chr(168)."Desea seguir jugando?\n";
+	printf "Seleccione el digito para su decision:\n";
+	printf "1. Continuar jugando\n2. Comprobar el puzzle\n3. Regresar a Menu\n";
 	my $continuar = <STDIN>;
 	if($continuar == 1){
 		&Plantilla2(1);
 	}
-	elsif($continuar==2){
-		&Menu(1);
-		@addedNumbers=[];
+	elsif($continuar == 2 ){
+		my $verificar = &Verificar(@addedNumbers);
+		if($verificar == 1){
+			my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
+			if($verificar > 0){
+				if($verificar == ($level*$level)){
+					&Win();
+				}
+				else{
+					print "\t".chr(173)." Excelente ! No has tenido erroresn";
+					&Plantilla2(1);
+				}
+			}
+			else{
+				&Plantilla2(1);
+			}
+		}
+		else{
+			&Plantilla2(1);
+		}
 	}
 	else{
-		&Exit();
+		&Menu(1);
+		@addedNumbers=();
 	}
+	#FIN VERIFICACION POR USUARIO
 }
 sub Plantilla3 {
 	$simbolicPlaces[1][1]=2000;
@@ -373,31 +423,40 @@ sub Plantilla3 {
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
 	&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
-	my $verificar = &Verificar(@addedNumbers);
-	if($verificar == 1){
-		my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
-		if($verificar > 0){
-			if($verificar == ($level*$level)){
-				&Win();
-			}
-			else{
-				print chr(173)." Tienes un buen juego !\n";
-			}
-			#- print "verifi".$verificar;
-		}
-	}
-	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
+	#VERIFICACION POR USUARIO
+	printf "\n".chr(168)."Desea seguir jugando?\n";
+	printf "Seleccione el digito para su decision:\n";
+	printf "1. Continuar jugando\n2. Comprobar el puzzle\n3. Regresar a Menu\n";
 	my $continuar = <STDIN>;
 	if($continuar == 1){
 		&Plantilla3(1);
 	}
-	elsif($continuar==2){
+	elsif($continuar == 2 ){
+		my $verificar = &Verificar(@addedNumbers);
+		if($verificar == 1){
+			my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
+			if($verificar > 0){
+				if($verificar == ($level*$level)){
+					&Win();
+				}
+				else{
+					print "\t".chr(173)." Excelente ! No has tenido errores\n";
+					&Plantilla3(1);
+				}
+			}
+			else{
+				&Plantilla3(1);
+			}
+		}
+		else{
+			&Plantilla3(1);
+		}
+	}
+	else{
 		&Menu(1);
 		@addedNumbers=();
 	}
-	else{
-		&Exit();
-	}
+	#FIN VERIFICACION POR USUARIO
 }
 sub Plantilla4 {
 	$simbolicPlaces[1][1] = 1000;
@@ -686,5 +745,5 @@ elsif($respuesta == 2){
 	&Menu(1);
 }
 else{
-	&Exit();
+	exit();
 }
