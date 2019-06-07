@@ -160,7 +160,7 @@ sub input {
 	printf "Ingrese el n".chr(163)."mero que quiere ingresar : ";
 	$numero = <STDIN>;
 	while($numero < 1 || $numero > $level){
-		print "El número que quiera ingresar debe ser del 1 al $level : ";
+		print "El n".chr(163)."mero que quiera ingresar debe ser del 1 al $level : ";
 		$numero = <STDIN>;
 	}
 
@@ -237,15 +237,17 @@ sub VerificarSimbolic {
 				}
 				elsif(defined $simbolicPlaces[$i][$j]){
 					if(defined $addedNumbers[$i][$j+1]){
-						if(($addedNumbers[$i][$j] - $addedNumbers[$i][$j+1]) != $simbolicPlaces[$i][$j]  or  ($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) != $simbolicPlaces[$i][$j] ){
+
+						if((($addedNumbers[$i][$j] - $addedNumbers[$i][$j+1]) != $simbolicPlaces[$i][$j]) and  (($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) != $simbolicPlaces[$i][$j]) ){
+							# or  ($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) != $simbolicPlaces[$i][$j] 
 							# or !(($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) == $simbolicPlaces[$i][$j])
 							$comparadores++;
-							print $addedNumbers[$i][$j]."-".$addedNumbers[$i][$j+1]."=".$simbolicPlaces[$i][$j]."\n";
+							print "resta:".($addedNumbers[$i][$j]-$addedNumbers[$i][$j+1])."\n";
 							print "\tTienes un DE 1 A 2 en la condici".chr(162)."n entre las casillas [$i][$j] \n";
 						}
 						# elsif(($addedNumbers[$i][$j+1] - $addedNumbers[$i][$j]) != $simbolicPlaces[$i][$j]){
 						# 	$comparadores++;
-						# 	print $addedNumbers[$i][$j+1]."-".$addedNumbers[$i][$j]."=".$simbolicPlaces[$i][$j]."\n";
+						# 	print "resta:".($addedNumbers[$i][$j+1]-$addedNumbers[$i][$j])."\n";
 						# 	print "\tTienes un DE 2 A 1  en la condici".chr(162)."n entre las casillas [$i][$j] \n";
 						# }
 					}
