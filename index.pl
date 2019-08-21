@@ -361,35 +361,6 @@ sub Plantilla1 {
 	}
 	#FIN VERIFICACION POR USUARIO
 
-	#VERIFICACION AUTOMATICA
-
-	# my $verificar = &Verificar(@addedNumbers);
-	# if($verificar == 1){
-	# 	my $verificar = &VerificarSimbolic(@simbolicPlaces,@addedNumbers);
-	# 	if($verificar > 0){
-	# 		if($verificar == ($level*$level)){
-	# 			&Win();
-	# 		}
-	# 		else{
-	# 			print chr(173)." Tienes un buen juego !\n";
-	# 		}
-	# 	}
-	# }
-	# printf chr(168)."Desea seguir jugando?\n";
-	# printf "Seleccione el digito para su decision:\n";
-	# printf "1. Continuar jugando\n2. Volver al menu\n 3., o cualquier otra tecla para salir \n";
-	# my $continuar = <STDIN>;
-	# if($continuar == 1){
-	# 	&Plantilla1(1);
-	# }
-	# elsif($continuar==2){
-	# 	&Menu(1);
-	# 	@addedNumbers=[];
-	# }
-	# else{
-	# 	&Exit();
-	# }
-	#FIN VERIFICACION AUTOMATICA
 }
 
 sub Plantilla2 {
