@@ -29,14 +29,6 @@ my $h=0;
 my $v=0;
 my $numero;
 my $p=0;
-<<<<<<< HEAD
-my $p=0;
-my $iIn=0;
-my $jIn=0;
-my $valorComparar=0;
-my $correcto=0;
-
-=======
 my $res='si';
 my $valorComparar=0;
 my $correcto=0;
@@ -44,12 +36,8 @@ my $definidos=0;
 my $continuar=0;
 my $columna;
 my $filas;
-<<<<<<< HEAD
 my $repetidos=0;
 my $comparadores=0;
-=======
->>>>>>> master
->>>>>>> develop
 #FUNCIONES
 	#Imprime la dimension de la matriz
 sub cuadro {
@@ -179,60 +167,21 @@ sub input {
 	return $h,$v,$numero;
 }
 
-<<<<<<< HEAD
 sub Verificar {
 	$repetidos=0;
 	$definidos=0;
 	for (my $i = 1; $i <= $level; $i++) {		
 		for(my $j=1; $j <= $level; $j++){
-=======
-sub Verificar() {
-	print "numero agregado:\n";
-
-	# print $addedNumbers[1][1];
-
-	for (my $i = 0; $i < $level; $i++) {		
-		for(my $j=0; $j < $level; $j++){
-			#defined es un equivalent de null
->>>>>>> develop
 			if(defined $addedNumbers[$i][$j]){
 				$definidos++;
 				# print "[$i][$j]";
 				$valorComparar=$addedNumbers[$i][$j];
-<<<<<<< HEAD
 				for (my $columna = 1; $columna <= $level; $columna++) {
 					if((defined $addedNumbers[$i][$columna]) and ($columna != $j)){
 						# print "LLEGUE AQUI".$j."Y LA I".$i."\n";
 						if($valorComparar==$addedNumbers[$i][$columna]){
 							$repetidos++;
 							print "\tTienes al menos, un valor repetido en la fila $i\n";
-=======
-				$correcto=0;
-<<<<<<< HEAD
-				for (my $columna = 0; $columna < $level; $columna++) {
-					if(defined $addedNumbers[$i][$columna]){
-						if($valorComparar!=$addedNumbers[$i][$columna]){
-							$correcto++;
-						}
-						else{
-							$correcto=0;
-						}
-					}
-				}
-=======
-				# print "Numero actual ".$addedNumbers[$i][$j];
-				for (my $columna = 0; $columna < $level; $columna++) {
-					if(defined $addedNumbers[$i][$columna] and ($columna != $j)){
-						$definidos++;
-						# print "Numero a comparar ". $addedNumbers[$i][$columna];
-						if($valorComparar!=$addedNumbers[$i][$columna]){
-							$correcto++;
-							# print $correcto . " en " . $addedNumbers[$i][$columna] . "\n";
-						}
-						else{
-							$correcto=0;
-							# print $correcto . "incorrecto en " . $addedNumbers[$i][$columna] . "en".$i.",". $columna."\n";
->>>>>>> develop
 						}
 					}
 				}
@@ -302,22 +251,10 @@ sub VerificarSimbolic {
 						}
 					}
 				}
-<<<<<<< HEAD
-=======
-				# print "¿Quieres seguir jugando? s/n ";
-				# $continuar=<STDIN>;
-				# if($continuar == "si" || $continuar == "s"){
-				# 	return 1;
-				# }
-				# else{
-				# 	return 0;
-				# }
->>>>>>> master
->>>>>>> develop
 			}
-		$iIn++;
+		
 		}
-	$jIn++;
+	
 	}
 	if($comparadores == 0){
 			# print "Tienes un buen juego en condiciones!\n";
@@ -547,7 +484,6 @@ sub Plantilla3 {
 	#FIN VERIFICACION POR USUARIO
 }
 sub Plantilla4 {
-<<<<<<< HEAD
 	$simbolicPlaces[1][1] = 1000;
 	$simbolicPlaces[2][4] = 1000;
 	$simbolicPlaces[2][2] = 1000;
@@ -566,72 +502,12 @@ sub Plantilla4 {
 		if($verificar > 0){
 			if($verificar == ($level*$level)){
 				&Win();
-=======
-	@mayorQue = (1000,1,1);
-	@menorQue = ((2000,0,1),(2000,2,2),(2000,2,3));
-	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 4;
-<<<<<<< HEAD
-	&cuadro(@simbolicPlaces,$level);
-	for($p=0;$p<4;$p++){
-		print "[";
-		for(my $q=0;$q < 4 ; $q++){
-			print "| |";
-		}
-		print "]\n";
-=======
-	if(@_[0] == 0){
-		&cuadro(@simbolicPlaces,$level);	
-	}
-	else{
-		&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
->>>>>>> master
-	}
-	@coordenadas=input($level);
-	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
-	print "¿Ingresar otro número?";
-	my $verificacion = <STDIN>;
-	if($verificacion == 1){
-		&Plantilla4(1);
-	}
-	else{
-<<<<<<< HEAD
-		&Verificar(@addedNumbers);
-=======
-		my $continuar = &Verificar(@addedNumbers);
-		if ($continuar == 1){
-			my $continuar = &VerificarSimbolic(@addedNumbers);
-			print "¿Deseas seguir jugando? Elija un digito : 1. Si 2. No";
-			$continuar=<STDIN>;
-			if($continuar == 1){
-				&Plantilla4(1);
-			}
-			else{
-				my $out = <STDIN>;
-			}
-
-		}
-		else{
-			print "¿Deseas seguir jugando? Elija un digito : 1. Si 2. No";
-			$continuar=<STDIN>;
-			if($continuar == 1){
-				&Plantilla4(1);
->>>>>>> develop
 			}
 			else{
 				print chr(173)." Tienes un buen juego !\n";
 			}
 			#- print "verifi".$verificar;
 		}
-<<<<<<< HEAD
-=======
-		# my $continuar= &Verificar(@addedNumbers);
-		# print "Continuar :" .$continuar;
-		# if($continuar == 0){
-		# 	@addedNumbers=[];
-		# }
->>>>>>> master
->>>>>>> develop
 	}
 	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
 	my $continuar = <STDIN>;
@@ -657,7 +533,6 @@ sub Plantilla5{
 	}
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
-<<<<<<< HEAD
 	&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
 	my $verificar = &Verificar(@addedNumbers);
 	if($verificar == 1){
@@ -670,31 +545,6 @@ sub Plantilla5{
 				print chr(173)." Tienes un buen juego !\n";
 			}
 			#- print "verifi".$verificar;
-=======
-	print "¿Ingresar otro número?";
-	my $verificacion = <STDIN>;
-	if($verificacion == 1){
-		&Plantilla6();
-	}
-	else{
-		&Verificar();
-	}
-}
-<<<<<<< HEAD
-sub Plantilla7{
-=======
-sub Plantilla7{ #Imprime el las dimensiones y+1
->>>>>>> master
-	@mayorQue = ((1000,4,0),(1000,1,4),(1000,4,5));
-	@menorQue = (2000,1,0);
-	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 5;
-	&cuadro(@simbolicPlaces,$level);
-		for($p=0;$p<5;$p++){
-		print "[";
-		for(my $q=0;$q < 5 ; $q++){
-			print "| |";
->>>>>>> develop
 		}
 	}
 	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
@@ -709,10 +559,6 @@ sub Plantilla7{ #Imprime el las dimensiones y+1
 	else{
 		&Exit();
 	}
-<<<<<<< HEAD
-	#1000 es > ; 2000 es < ; # es numeroResiduo
-=======
->>>>>>> master
 }
 sub Plantilla6{
 	$simbolicPlaces[1][3] = 1000;
@@ -724,7 +570,6 @@ sub Plantilla6{
 	}
 	@coordenadas=input($level);
 	$addedNumbers[$coordenadas[0]][$coordenadas[1]] = $coordenadas[2];
-<<<<<<< HEAD
 	&cuadroConNumeros(@simbolicPlaces,$level,@addedNumbers);
 	my $verificar = &Verificar(@addedNumbers);
 	if($verificar == 1){
@@ -737,31 +582,6 @@ sub Plantilla6{
 				print chr(173)." Tienes un buen juego !\n";
 			}
 			#- print "verifi".$verificar;
-=======
-	print "¿Ingresar otro número?";
-	my $verificacion = <STDIN>;
-	if($verificacion == 1){
-		&Plantilla9();
-	}
-	else{
-		&Verificar();
-	}
-<<<<<<< HEAD
-	#1000 es > ; 2000 es < ; # es numeroResiduo
-=======
->>>>>>> master
-}
-sub Plantilla10{
-	@mayorQue = ((1000,2,1),(1000,0,3),(1000,3,3));
-	@menorQue = ((2000,1,0),(2000,4,0),(2000,4,3),(2000,3,5));
-	@simbolicPlaces = (\@mayorQue,\@menorQue);
-	$level= 6;
-	&cuadro(@simbolicPlaces,$level);
-		for($p=0;$p<6;$p++){
-		print "[";
-		for(my $q=0;$q < 6 ; $q++){
-			print "| |";
->>>>>>> develop
 		}
 	}
 	printf chr(168)."Desea seguir jugando? Seleccione 1 si es asi, 2 para volver al menu , o cualquier otra tecla para salir \n";
@@ -914,7 +734,6 @@ sub SelectGame {
 }
 
 sub Instrucciones {
-<<<<<<< HEAD
 	print "\n";
 	printf "Instrucciones.\n";
 	printf "Para poder jugar este puzzle, deber".chr(160)."s saber sus reglas:\n";
@@ -925,15 +744,6 @@ sub Instrucciones {
 	printf "\t| 3 (>) 1 (<) 2 | \n";
 	printf "\t| 1  || 2  || 3 | \n";
 	printf "\t| 2  || 3  || 1 | \n\n";
-=======
-	print "Instrucciones.\n";
-	print "Para poder jugar este puzzle, deber\240s saber sus reglas:\n";
-	print "Los n\243meros no deben repetirse en fila \242 columna.\n";
-	print "Habr\240 s\241mbolos c\242mo : '<' \242 '>', esto significa, que cada vez que encuentres uno, tendr\240s que poner n\241meros en los cuadros adyacentes que cumplan esta regla, por ejemplo:\n";
-	print "|5|(>)|2|  Aqu\241, esta regla es cumplida, por lo tanto, puedes continuar.\n";
-	&Menu(1);
-}
->>>>>>> develop
 
 	printf "-Si encuentras un n".chr(163)."mero en el tablero, eso significa que los valores que pongas en los cuadros adyacentes, si son restados deben dar como resultado el n".chr(163)."mero que haya entre ambos.\n";
 	printf "\tPor ejemplo: Si restamos 3 - 1 , el resultado es igual a 2. El orden no importa, por lo cual tambi".chr(130)."n puedes escribir |1|(2)|3|\n";
