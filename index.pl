@@ -125,6 +125,8 @@ sub cuadroConNumeros {
 }
 
 
+
+##holi
 	# Xn+1=(2xo + c)mod m
 sub numAleatorio {
 	for(my $i=0;$i<$n;$i++){
